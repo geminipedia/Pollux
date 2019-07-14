@@ -3,6 +3,7 @@ type User {
 # ---
   userName: String! @unique
   email: String! @unique
+  displayName: String
   firstName: String
   lastName: String
   description: String
