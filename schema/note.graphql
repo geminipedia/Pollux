@@ -1,0 +1,12 @@
+type Note {
+  id: UUID! @unique
+# ---
+  content: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  user: User!
+  notes: [Note!]
+# ---
+  meta: Json
+}
