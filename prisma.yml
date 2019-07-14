@@ -21,6 +21,7 @@ datamodel:
   - ./schema/news.graphql
   - ./schema/post.graphql
   - ./schema/tag.graphql
+  - ./schema/theme.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

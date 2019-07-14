@@ -1,0 +1,11 @@
+type Theme {
+  id: UUID! @unique
+# ---
+  name: String!
+  description: String
+  component: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  meta: Json
+}
