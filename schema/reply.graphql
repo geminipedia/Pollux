@@ -1,0 +1,13 @@
+type Reply {
+  id: UUID! @unique           # System only
+  replyId: Int! @unique       # Human-readable format
+# ---
+  content: String!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  replies: [Reply!]
+# ---
+  meta: Json
+}

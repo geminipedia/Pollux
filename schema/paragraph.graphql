@@ -1,0 +1,23 @@
+enum ParagraphType {
+  HEADLINE,
+  TITLE,
+  SUBTITLE,
+  QUOTE,
+  PART,
+  PARAGRAPH,
+  IMAGE
+}
+
+type Paragraph {
+  id: UUID! @unique
+# ---
+  index: Int! @default(value: 0)
+  text: String
+  type: ParagraphType
+# ---
+  markup: [Markup!]
+  quotes: [Quote!]
+  replies: [Reply!]
+# ---
+  meta: Json
+}

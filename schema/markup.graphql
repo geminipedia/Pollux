@@ -1,0 +1,19 @@
+enum MarkupType {
+  EMBED,
+  ITEM,
+  IMAGE,
+  LINK,
+  ITALIC,
+  STRONG
+}
+
+interface Markup {
+  type: MarkupType!
+  start: Int
+  end: Int
+  href: String
+  rel: String
+  src: String
+  title: String
+  meta: Json
+}

@@ -12,6 +12,10 @@ datamodel:
   - ./schema/item.graphql
   - ./schema/property.graphql
   - ./schema/statement.graphql
+  - ./schema/paragraph.graphql
+  - ./schema/markup.graphql
+  - ./schema/quote.graphql
+  - ./schema/reply.graphql
 generate:
   - generator: typescript-client
     output: ./api/model
