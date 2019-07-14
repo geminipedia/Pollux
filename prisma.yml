@@ -16,6 +16,9 @@ datamodel:
   - ./schema/markup.graphql
   - ./schema/quote.graphql
   - ./schema/reply.graphql
+  - ./schema/article.graphql
+  - ./schema/news.graphql
+  - ./schema/post.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

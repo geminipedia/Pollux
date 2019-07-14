@@ -1,0 +1,14 @@
+type Post implements Article {
+  id: UUID! @unique
+# ---
+  title: String!
+  published: Boolean! @default(value: false)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  validUntil: DateTime!
+# ---
+  author: User!
+  banner: [Image!]
+# ---
+  meta: Json
+}
