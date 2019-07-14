@@ -20,6 +20,7 @@ datamodel:
   - ./schema/article.graphql
   - ./schema/news.graphql
   - ./schema/post.graphql
+  - ./schema/tag.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

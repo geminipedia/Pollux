@@ -9,6 +9,7 @@ type Post implements Article {
 # ---
   author: User!
   banner: [Image!]
+  tags: [Tag!]
 # ---
   meta: Json
 }

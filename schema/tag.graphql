@@ -1,0 +1,10 @@
+type Tag {
+  id: ID! @unique
+# ---
+  name: String! @unique
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  meta: Json
+}
