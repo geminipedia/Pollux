@@ -19,6 +19,7 @@ type Permission {
 # ---
   type: String! @unique
   loginAdmin: Boolean! @default(value: false)
+  banned: Boolean! @default(value: false)
 # ---
   news: PermissionType! @relation(name: "NewsPermission")
   post: PermissionType! @relation(name: "PostPermission")
