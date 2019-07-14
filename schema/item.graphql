@@ -1,0 +1,15 @@
+type Item {
+  id: UUID! @unique           # System only
+  itemId: String! @unique     # Human-readable format
+# ---
+  name: i18nOrString!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  images: [Image!]
+  statements: [Statement!]
+  introduction: [Paragraph!]
+  logs: [Log!]
+# ---
+  meta: Json
+}

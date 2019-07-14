@@ -9,6 +9,9 @@ datamodel:
   - ./schema/lang.graphql
   - ./schema/file.graphql
   - ./schema/image.graphql
+  - ./schema/item.graphql
+  - ./schema/property.graphql
+  - ./schema/statement.graphql
 generate:
   - generator: typescript-client
     output: ./api/model
