@@ -1,0 +1,14 @@
+type File {
+  id: UUID! @unique
+# ---
+  name: String!
+  path: String!
+  size: Float! @default(value: 0.0)
+  hidden: Boolean! @default(value: false)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  uploadBy: User!
+# ---
+  meta: Json
+}

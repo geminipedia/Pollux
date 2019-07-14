@@ -7,6 +7,8 @@ datamodel:
   - ./schema/permission.graphql
   - ./schema/i18n.graphql
   - ./schema/lang.graphql
+  - ./schema/file.graphql
+  - ./schema/image.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

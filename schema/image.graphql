@@ -1,0 +1,16 @@
+interface Measurement {
+  height: Float! @default(value: 0.0)
+  width: Float! @default(value: 0.0)
+}
+
+type Image {
+  id: UUID! @unique
+# ---
+  name: String!
+  description: String
+  format: Measurement
+# ---
+  file: File
+# ---
+  meta: Json
+}
