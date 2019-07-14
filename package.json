@@ -5,7 +5,7 @@
   "repository": "git@github.com:geminipedia/pollux.git",
   "description": "A flexable Web API Server for Project Gemini.",
   "author": "Aries Cs <aries0d0f@gmail.com>",
-  "license": "MIT License",
+  "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/prisma deploy && ./node_modules/.bin/prisma generate && ./node_modules/.bin/ts-node index.ts",
     "server": "./node_modules/.bin/ts-node index.ts",
