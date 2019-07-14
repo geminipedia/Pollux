@@ -1,0 +1,10 @@
+type Log {
+  id: UUID! @unique
+# ---
+  ip: String!
+# ---
+  event: Event!
+  user: User!
+# ---
+  meta: Json
+}

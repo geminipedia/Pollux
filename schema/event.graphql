@@ -1,0 +1,16 @@
+enum EventType {
+  ERROR,
+  WARNING,
+  INFO,
+  LOG
+}
+
+type Event {
+  id: UUID! @unique
+# ---
+  type: EventType! @default(value: "LOG")
+  result: String
+  timemark: DateTime!
+# ---
+  meta: Json
+}
