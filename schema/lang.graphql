@@ -1,0 +1,8 @@
+type Lang {
+  id: UUID! @unique
+# ---
+  code: String! @unique
+  langName: i18nOrString!
+# ---
+  meta: Json
+}

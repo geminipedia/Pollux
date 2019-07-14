@@ -5,6 +5,8 @@ datamodel:
   - ./schema/user.graphql
   - ./schema/group.graphql
   - ./schema/permission.graphql
+  - ./schema/i18n.graphql
+  - ./schema/lang.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

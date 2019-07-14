@@ -1,0 +1,13 @@
+enum i18nOrString {
+  i18n,
+  String
+}
+
+type i18n {
+  id: UUID! @unique
+# ---
+  text: String
+  lang: Lang!
+# ---
+  meta: Json
+}
