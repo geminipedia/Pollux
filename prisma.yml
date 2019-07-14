@@ -1,27 +1,27 @@
 endpoint: http://localhost:4466
 datamodel:
-  - ./schema/event.graphql
-  - ./schema/log.graphql
-  - ./schema/user.graphql
-  - ./schema/group.graphql
-  - ./schema/permission.graphql
-  - ./schema/i18n.graphql
-  - ./schema/lang.graphql
-  - ./schema/file.graphql
-  - ./schema/image.graphql
-  - ./schema/item.graphql
-  - ./schema/property.graphql
-  - ./schema/statement.graphql
-  - ./schema/paragraph.graphql
-  - ./schema/markup.graphql
-  - ./schema/quote.graphql
-  - ./schema/reply.graphql
-  - ./schema/note.graphql
-  - ./schema/article.graphql
-  - ./schema/news.graphql
-  - ./schema/post.graphql
-  - ./schema/tag.graphql
-  - ./schema/theme.graphql
+  - ./db/event.graphql
+  - ./db/log.graphql
+  - ./db/user.graphql
+  - ./db/group.graphql
+  - ./db/permission.graphql
+  - ./db/i18n.graphql
+  - ./db/lang.graphql
+  - ./db/file.graphql
+  - ./db/image.graphql
+  - ./db/item.graphql
+  - ./db/property.graphql
+  - ./db/statement.graphql
+  - ./db/paragraph.graphql
+  - ./db/markup.graphql
+  - ./db/quote.graphql
+  - ./db/reply.graphql
+  - ./db/note.graphql
+  - ./db/article.graphql
+  - ./db/news.graphql
+  - ./db/post.graphql
+  - ./db/tag.graphql
+  - ./db/theme.graphql
 generate:
   - generator: typescript-client
     output: ./api/model
