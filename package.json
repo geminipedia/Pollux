@@ -37,9 +37,11 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.3.2",
     "@types/node": "^12.6.2",
     "@types/nodemailer": "^6.2.0",
     "ts-lint": "^4.5.1",
+    "tslint": "^5.18.0",
     "typescript-eslint-parser": "^22.0.0"
   }
 }
