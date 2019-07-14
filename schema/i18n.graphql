@@ -1,13 +1,10 @@
-enum i18nOrString {
-  [i18n],
-  String
-}
-
 type i18n {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   text: String
+# ---
   lang: Lang!
+  i18n: [i18n!]
 # ---
   meta: Json
 }

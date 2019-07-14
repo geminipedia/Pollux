@@ -1,10 +1,12 @@
-interface Measurement {
+type Measurement {
+  id: UUID! @unique @id
+# ---
   height: Float! @default(value: 0.0)
   width: Float! @default(value: 0.0)
 }
 
 type Image {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   name: String!
   description: String

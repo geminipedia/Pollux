@@ -9,7 +9,7 @@ enum ParagraphType {
 }
 
 type Paragraph {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   index: Int! @default(value: 0)
   text: String

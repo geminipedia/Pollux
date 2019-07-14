@@ -1,5 +1,5 @@
 type News implements Article {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   title: String!
   published: Boolean! @default(value: false)

@@ -1,10 +1,11 @@
 type Statement {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   createdAt: DateTime!
   updatedAt: DateTime!
-  value: i18nOrString!
+  value: String!
 # ---
+  i18n: [i18n!]
   reference: Item
 # ---
   meta: Json

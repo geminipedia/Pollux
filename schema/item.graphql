@@ -1,11 +1,13 @@
 type Item {
-  id: UUID! @unique           # System only
+  id: UUID! @unique @id       # System only
   itemId: String! @unique     # Human-readable format
 # ---
-  name: i18nOrString!
+  name: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
+# ---
+  i18n: [i18n]
   images: [Image!]
   statements: [Statement!]
   introduction: [Paragraph!]

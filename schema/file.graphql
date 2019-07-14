@@ -1,5 +1,5 @@
 type File {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   name: String!
   path: String!

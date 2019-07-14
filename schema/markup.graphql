@@ -7,7 +7,9 @@ enum MarkupType {
   STRONG
 }
 
-interface Markup {
+type Markup {
+  id: UUID! @unique @id
+# ---
   type: MarkupType!
   start: Int
   end: Int

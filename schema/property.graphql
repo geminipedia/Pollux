@@ -1,12 +1,13 @@
 type Property {
-  id: UUID! @unique           # System only
+  id: UUID! @unique @id       # System only
   propertyId: String! @unique # Human-readable format
 # ---
-  name: i18nOrString! @unique
+  name: String! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  description: i18nOrString
+  description: String
 # ---
+  i18n: [i18n!]
   logs: [Log!]
 # ---
   meta: Json

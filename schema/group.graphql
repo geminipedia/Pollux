@@ -1,5 +1,5 @@
 type Group {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   name: String! @unique
   description: String

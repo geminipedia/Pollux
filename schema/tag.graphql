@@ -1,5 +1,5 @@
 type Tag {
-  id: ID! @unique
+  id: ID! @unique @id
 # ---
   name: String! @unique
   description: String

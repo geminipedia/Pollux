@@ -1,5 +1,5 @@
 type Note {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   content: String
   createdAt: DateTime!

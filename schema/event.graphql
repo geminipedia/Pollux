@@ -6,9 +6,9 @@ enum EventType {
 }
 
 type Event {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
-  type: EventType! @default(value: "LOG")
+  type: EventType! @default(value: LOG)
   result: String
   timemark: DateTime!
 # ---

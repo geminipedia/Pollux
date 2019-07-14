@@ -5,11 +5,11 @@ enum QuoteType {
 }
 
 type Quote {
-  id: UUID! @unique
+  id: UUID! @unique @id
 # ---
   start: Int! @default(value: 0)
   end: Int! @default(value: 0)
-  type: QuoteType! @default(value: "HIGHLIGHT")
+  type: QuoteType! @default(value: HIGHLIGHT)
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---

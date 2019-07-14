@@ -1,5 +1,5 @@
 type Reply {
-  id: UUID! @unique           # System only
+  id: UUID! @unique @id       # System only
   replyId: Int! @unique       # Human-readable format
 # ---
   content: String!
