@@ -1,3 +1,7 @@
+# Certificate
+cert/*.key
+cert/*.pub
+
 # Logs
 logs
 *.log

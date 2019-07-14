@@ -1,0 +1,6 @@
+endpoint: http://localhost:4466
+datamodel:
+  - ./schema/datamodel.graphql
+generate:
+  - generator: typescript-client
+    output: ./api/model
