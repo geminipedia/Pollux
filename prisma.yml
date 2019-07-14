@@ -1,7 +1,10 @@
 endpoint: http://localhost:4466
 datamodel:
-  - ./schema/log.graphql
   - ./schema/event.graphql
+  - ./schema/log.graphql
+  - ./schema/user.graphql
+  - ./schema/group.graphql
+  - ./schema/permission.graphql
 generate:
   - generator: typescript-client
     output: ./api/model

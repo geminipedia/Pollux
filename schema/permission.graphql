@@ -1,0 +1,32 @@
+interface Access {
+  read: Boolean! @default(value: false)
+  write: Boolean! @default(value: false)
+  delete: Boolean! @default(value: false)
+}
+
+interface PermissionType {
+  owner: Access!
+  group: Access!
+  anyone: Access!
+}
+
+type Permission {
+  id: UUID! @unique
+# ---
+  type: String! @unique
+  loginAdmin: Boolean! @default(value: false)
+# ---
+  news: PermissionType!
+  post: PermissionType!
+  reply: PermissionType!
+  item: PermissionType!
+  property: PermissionType!
+  user: PermissionType!
+  group: PermissionType!
+  property: PermissionType!
+  layout: PermissionType!
+  log: PermissionType!
+  analytics: PermissionType!
+# ---
+  meta: Json
+}

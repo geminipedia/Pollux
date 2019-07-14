@@ -1,0 +1,16 @@
+type User {
+  id: UUID! @unique
+# ---
+  userName: String! @unique
+  email: String! @unique
+  firstName: String
+  lastName: String
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  avatar: Image
+  group: Group
+# ---
+  meta: Json
+}

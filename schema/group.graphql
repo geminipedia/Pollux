@@ -1,0 +1,10 @@
+type Group {
+  id: UUID! @unique
+# ---
+  name: String! @unique
+  description: String
+# ---
+  permission: Permission!
+# ---
+  meta: Json
+}
