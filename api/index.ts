@@ -26,6 +26,8 @@ const server = new GraphQLServer({
   })
 });
 
+server.express.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal', ...process.env.TRUST_PROXYS.split(',')]);
+
 server.express.use(cors({
   credentials: true,
   origin: 'https://mslib.tw'
