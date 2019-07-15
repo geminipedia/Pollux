@@ -10,6 +10,7 @@ import Post from './post';
 import News from './news';
 import Paragraph from './paragraph';
 import Note from './note';
+import Quote from './quote';
 import Log from './log';
 import Image from './image';
 import File from './file';
@@ -28,6 +29,7 @@ export default {
   News,
   Paragraph,
   Note,
+  Quote,
   Log,
   Image,
   File,
