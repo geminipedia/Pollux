@@ -3,13 +3,15 @@ import propertyQuery from './property';
 import postQuery from './post';
 import newsQuery from './news';
 import groupQuery from './group';
+import logQuery from './log';
 
 const Query = {
   ...itemQuery,
   ...propertyQuery,
   ...postQuery,
   ...newsQuery,
-  ...groupQuery
+  ...groupQuery,
+  ...logQuery
 };
 
 export default Query;
