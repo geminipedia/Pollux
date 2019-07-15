@@ -8,6 +8,7 @@ import News from './news';
 import Group from './group';
 import Permission from './permission';
 import PermissionType from './permissionType';
+import Log from './log';
 
 export default {
   Item,
@@ -19,5 +20,6 @@ export default {
   Property,
   Entity,
   Post,
-  News
+  News,
+  Log
 };
