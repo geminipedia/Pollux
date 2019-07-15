@@ -22,7 +22,7 @@ const groupMutation = {
         result: `Group ${args.name} create successed.`
       });
 
-      return context.prisma.createGroup(args);
+      return prisma.createGroup(args);
     } catch (err) {
       throw new Error(err.message || '#ERR_FFFF');
     }
