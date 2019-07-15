@@ -1,10 +1,13 @@
 import { Profile } from 'passport-google-oauth20';
 import { Request } from 'express';
+import * as dotenv from 'dotenv';
 
 import { prisma, User } from '../model';
 import log from '../util/log';
 import token from './token';
 import auth from '.';
+
+dotenv.config();
 
 const user = {
   async signUp(req: Request, profile: Profile): Promise<void> {

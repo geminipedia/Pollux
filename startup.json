@@ -2,7 +2,7 @@
   "apps": [{
     "name": "Gemini-Pollux",
     "script": "./node_modules/.bin/ts-node",
-    "args": ["api/index.ts", "--dotenv", ".env"],
+    "args": ["api/index.ts"],
     "instances" : "max",
     "exec_mode" : "cluster",
     "watch": true

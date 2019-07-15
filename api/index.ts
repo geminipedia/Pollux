@@ -1,10 +1,12 @@
 import { GraphQLServer } from 'graphql-yoga';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import passport, { Profile } from 'passport';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
-import passport, { Profile } from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import path from 'path';
+import * as dotenv from 'dotenv';
 
 import { typeDefs } from './model/prisma-schema';
 import { prisma } from './model';
@@ -12,6 +14,8 @@ import Query from './query';
 import Mutation from './mutation';
 import Resolver from './resolver';
 import auth from './auth';
+
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const server = new GraphQLServer({
   typeDefs,

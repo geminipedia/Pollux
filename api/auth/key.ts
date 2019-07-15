@@ -1,9 +1,13 @@
+import { Request } from 'express';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
-import { Request } from 'express';
+import * as dotenv from 'dotenv';
+
 import { UserSignPayload, UserKeyOptions } from '../types';
 import log from '../util/log';
+
+dotenv.config();
 
 const publicKey = fs.readFileSync(path.resolve(__dirname, '../../', process.env.PUBLIC_KEY));
 const privateKey = fs.readFileSync(path.resolve(__dirname, '../../', process.env.PRIVATE_KEY));

@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
+import * as dotenv from 'dotenv';
+
 import { prisma, User } from '../model';
 import { UserSignPayload } from '../types';
 import auth from '.';
+
+dotenv.config();
 
 const token = {
   set: (res: Response, cookie: string): void => {
