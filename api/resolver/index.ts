@@ -17,6 +17,7 @@ import Image from './image';
 import File from './file';
 import i18n from './i18n';
 import Site from './site';
+import Admin from './admin';
 
 export default {
   Item,
@@ -37,5 +38,6 @@ export default {
   Image,
   File,
   i18n,
-  Site
+  Site,
+  Admin
 };
