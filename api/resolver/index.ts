@@ -9,6 +9,7 @@ import Group from './group';
 import Permission from './permission';
 import PermissionType from './permissionType';
 import Log from './log';
+import Image from './image';
 
 export default {
   Item,
@@ -21,5 +22,6 @@ export default {
   Entity,
   Post,
   News,
-  Log
+  Log,
+  Image
 };
