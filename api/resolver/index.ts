@@ -10,6 +10,7 @@ import Permission from './permission';
 import PermissionType from './permissionType';
 import Log from './log';
 import Image from './image';
+import File from './file';
 
 export default {
   Item,
@@ -23,5 +24,6 @@ export default {
   Post,
   News,
   Log,
-  Image
+  Image,
+  File
 };
