@@ -7,5 +7,6 @@ interface Article {
   author: User!
   banner: [Image!]
   paragraphs: [Paragraph!]
+  replies: [Reply!]
   meta: Json
 }

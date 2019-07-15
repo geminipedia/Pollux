@@ -10,6 +10,7 @@ type News implements Article {
   author: User! @relation(line: INLINE, name: "NewsAuthor")
   banner: [Image!] @relation(line: TABLE, name: "NewsToBanner")
   paragraphs: [Paragraph!] @relation(link: TABLE, name: "NewsToParagraph")
+  replies: [Reply!] @relation(link: TABLE, name: "NewsToReply")
   tags: [Tag!] @relation(link: TABLE, name: "NewsToTag")
 # ---
   meta: Json
