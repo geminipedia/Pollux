@@ -9,6 +9,7 @@ import Entity from './entity';
 import Post from './post';
 import News from './news';
 import Paragraph from './paragraph';
+import Note from './note';
 import Log from './log';
 import Image from './image';
 import File from './file';
@@ -26,6 +27,7 @@ export default {
   Post,
   News,
   Paragraph,
+  Note,
   Log,
   Image,
   File,
