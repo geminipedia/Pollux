@@ -5,11 +5,15 @@ import Property from './property';
 import Post from './post';
 import News from './news';
 import Group from './group';
+import Permission from './permission';
+import PermissionType from './permissionType';
 
 export default {
   Item,
   User,
   Group,
+  Permission,
+  PermissionType,
   Statement,
   Property,
   Post,
