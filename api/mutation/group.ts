@@ -1,11 +1,11 @@
 import { Context } from 'graphql-yoga/dist/types';
-import { Group, prisma } from '../model';
+import { prisma, Group, GroupCreateInput } from '../model';
 import log from '../util/log';
 
 const groupMutation = {
-  async createGroup(_, args, context: Context): Promise<Group> {
+  async createGroup(_, args: { data: GroupCreateInput }, context: Context): Promise<Group> {
     try {
-      const groupExist = await prisma.group({ name: args.name });
+      const groupExist = await prisma.group({ name: args.data.name });
 
       if (groupExist) {
         // Write Log
@@ -19,10 +19,10 @@ const groupMutation = {
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Group ${args.name} create successed.`
+        result: `Group ${args.data.name} create successed.`
       });
 
-      return prisma.createGroup(args);
+      return prisma.createGroup(args.data);
     } catch (err) {
       throw new Error(err.message || '#ERR_FFFF');
     }
