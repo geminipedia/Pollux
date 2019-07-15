@@ -6,7 +6,7 @@ const token = {
     res.cookie('__TOKEN', cookie,
       {
         domain: '.mslib.tw',
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
         httpOnly: false,
         secure: true
       }
