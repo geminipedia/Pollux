@@ -4,8 +4,8 @@ type Theme {
   name: String!
   description: String
   component: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   preview: [Image!] @relation(link: TABLE, name: "ThemeToImage")
   creator: User! @relation(link: INLINE, name: "ThemeCreator")

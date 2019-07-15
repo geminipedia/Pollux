@@ -1,8 +1,8 @@
 type Statement {
   id: UUID! @unique @id
 # ---
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   value: String!
   index: Int @default(value: 0)
 # ---

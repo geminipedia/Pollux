@@ -28,8 +28,8 @@ type Page {
   path: String! @unique
   name: String! @unique
   type: PageType!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   label: [i18n!]
   head: PageHead! @relation(link: INLINE, name: "PageHead")

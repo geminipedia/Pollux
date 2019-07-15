@@ -11,8 +11,8 @@ type Image {
   name: String!
   description: String
   format: Measurement
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   file: File @relation(link: INLINE, name: "ImageFile")
 # ---

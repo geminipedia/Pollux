@@ -2,8 +2,8 @@ type Note {
   id: UUID! @unique @id
 # ---
   content: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(line: INLINE, name: "NoteUser")
   notes: [Note!] @relation(link: TABLE, name: "NoteToNote")

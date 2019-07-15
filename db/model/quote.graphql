@@ -10,8 +10,8 @@ type Quote {
   start: Int! @default(value: 0)
   end: Int! @default(value: 0)
   type: QuoteType! @default(value: HIGHLIGHT)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(line: INLINE, name: "QuoteUser")
   notes: [Note!] @relation(line: TABLE, name: "QuoteToNote")

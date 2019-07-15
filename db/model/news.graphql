@@ -3,8 +3,8 @@ type News implements Article {
 # ---
   title: String!
   published: Boolean! @default(value: false)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   validUntil: DateTime!
 # ---
   author: User! @relation(line: INLINE, name: "NewsAuthor")

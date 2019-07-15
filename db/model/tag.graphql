@@ -3,8 +3,8 @@ type Tag {
 # ---
   name: String! @unique
   description: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   meta: Json
 }

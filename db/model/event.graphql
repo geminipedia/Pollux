@@ -10,7 +10,7 @@ type Event {
 # ---
   type: EventType! @default(value: LOG)
   result: String
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
 # ---
   meta: Json
 }

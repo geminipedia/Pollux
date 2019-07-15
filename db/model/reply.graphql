@@ -3,8 +3,8 @@ type Reply {
   replyId: Int! @unique       # Human-readable format
 # ---
   content: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(link: INLINE, name: "ReplyUser")
   replies: [Reply!] @relation(link: TABLE, name: "ReplyToReply")

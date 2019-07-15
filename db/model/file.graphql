@@ -5,8 +5,8 @@ type File {
   path: String!
   size: Float! @default(value: 0.0)
   hidden: Boolean! @default(value: false)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   uploadBy: User! @relation(link: INLINE, name: "FileUploadBy")
 # ---

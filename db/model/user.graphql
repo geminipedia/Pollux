@@ -7,8 +7,8 @@ type User {
   firstName: String
   lastName: String
   description: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   avatar: Image @relation(line: INLINE, name: "UserAvatar")
   group: Group! @relation(link: INLINE, name: "UserGroup")

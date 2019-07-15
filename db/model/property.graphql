@@ -3,8 +3,8 @@ type Property {
   propertyId: String! @unique # Human-readable format
 # ---
   name: String! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   description: String
 # ---
   i18n: [i18n!] @relation(link: TABLE, name: "PropertyToI18n")

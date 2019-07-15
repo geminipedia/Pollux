@@ -3,8 +3,8 @@ interface Core {
 # ---
   name: String!
   domain: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   menu: [Page!]!
 # ---

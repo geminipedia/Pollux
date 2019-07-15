@@ -3,8 +3,8 @@ type Item {
   itemId: String! @unique     # Human-readable format
 # ---
   name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   i18n: [i18n] @relation(link: TABLE, name: "ItemToI18n")
   images: [Image!] @relation(link: TABLE, name: "ItemToImage")

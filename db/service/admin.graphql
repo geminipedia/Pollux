@@ -4,8 +4,8 @@ type Admin implements Site {
   name: String!
   domain: String!
   public: Boolean! @default(value: false)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 # ---
   menu: [Page!]!
   access: [Group!]
