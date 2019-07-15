@@ -6,5 +6,6 @@ interface Article {
   updatedAt: DateTime! @updatedAt
   author: User!
   banner: [Image!]
+  paragraphs: [Paragraph!]
   meta: Json
 }

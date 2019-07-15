@@ -9,6 +9,7 @@ type Post implements Article {
 # ---
   author: User! @relation(link: INLINE, name: "PostAuthor")
   banner: [Image!] @relation(link: TABLE, name: "PostBanner")
+  paragraphs: [Paragraph!] @relation(link: TABLE, name: "PostToParagraph")
   tags: [Tag!] @relation(link: TABLE, name: "PostToTag")
 # ---
   meta: Json
