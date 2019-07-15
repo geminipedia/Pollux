@@ -6,7 +6,6 @@ type Item {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-# ---
   i18n: [i18n]
   images: [Image!]
   statements: [Statement!]

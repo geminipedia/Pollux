@@ -60,6 +60,7 @@ passport.use(new GoogleStrategy(
       const userExisted = await prisma.user({ userName: profile.id });
       if (userExisted) {
         done(null, userExisted);
+        return userExisted;
       }
 
       await prisma.createUser({
@@ -67,7 +68,7 @@ passport.use(new GoogleStrategy(
         email: profile.emails[0].value,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName
-      })
+      });
 
       const user = await prisma.updateUser({
         data: {
@@ -91,11 +92,14 @@ passport.use(new GoogleStrategy(
         where: {
           userName: profile.id
         }
-      })
+      });
+
       done(null, profile);
+
+      return user;
     } catch (error) {
       done(error, null);
-      throw new Error('#ERR_FFF');
+      throw new Error('#ERR_FFFF');
     }
   }
 ));
@@ -104,7 +108,7 @@ server.express.get('/googleOAuth', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 server.express.get('/googleOAuthCallback', passport.authenticate('google'), (req, res) => {
-  res.redirect('https://mslib.tw')
+  res.redirect('https://mslib.tw');
 });
 
 server.start({ port: process.env.API_PORT }, () => console.log(`Server is running on http://localhost:${process.env.API_PORT}`));

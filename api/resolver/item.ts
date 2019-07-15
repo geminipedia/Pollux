@@ -1,11 +1,11 @@
-import { prisma } from '../model';
+import { prisma, Item, Statement, FragmentableArray } from '../model';
 
 const Item = {
-  introduction(parent) {
+  introduction(parent: Item): FragmentableArray<Item> {
     return prisma.item({ id: parent.id }).introduction({ orderBy: 'index_ASC' });
   },
 
-  statements(parent) {
+  statements(parent: Item): FragmentableArray<Statement> {
     return prisma.item({ id: parent.id }).statements();
   }
 };
