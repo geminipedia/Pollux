@@ -12,6 +12,7 @@ type User {
 # ---
   avatar: Image @relation(line: INLINE, name: "UserAvatar")
   group: Group! @relation(link: INLINE, name: "UserGroup")
+  logs: [Log!] @relation(link: TABLE, name: "UserToLog")
 # ---
   meta: Json
 }
