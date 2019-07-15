@@ -2,6 +2,7 @@ import Item from './item';
 import User from './user';
 import Statement from './statement';
 import Property from './property';
+import Entity from './entity';
 import Post from './post';
 import News from './news';
 import Group from './group';
@@ -16,6 +17,7 @@ export default {
   PermissionType,
   Statement,
   Property,
+  Entity,
   Post,
   News
 };
