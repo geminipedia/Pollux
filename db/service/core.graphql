@@ -6,7 +6,7 @@ interface Core {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  menu: [Pages!]!
+  menu: [Page!]!
 # ---
   meta: Json
 }
