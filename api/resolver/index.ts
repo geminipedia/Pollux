@@ -12,6 +12,7 @@ import Paragraph from './paragraph';
 import Log from './log';
 import Image from './image';
 import File from './file';
+import i18n from './i18n';
 
 export default {
   Item,
@@ -27,5 +28,6 @@ export default {
   Paragraph,
   Log,
   Image,
-  File
+  File,
+  i18n
 };
