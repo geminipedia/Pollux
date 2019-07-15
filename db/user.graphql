@@ -11,7 +11,7 @@ type User {
   updatedAt: DateTime!
 # ---
   avatar: Image
-  group: Group
+  group: Group! @relation(link: INLINE, name: "UserGroup")
 # ---
   meta: Json
 }
