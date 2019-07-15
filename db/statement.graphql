@@ -4,8 +4,10 @@ type Statement {
   createdAt: DateTime!
   updatedAt: DateTime!
   value: String!
+  index: Int @default(value: 0)
 # ---
   i18n: [i18n!]
+  property: Property @relation(name: "StatementToProperty")
   reference: Item
 # ---
   meta: Json
