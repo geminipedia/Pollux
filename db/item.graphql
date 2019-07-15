@@ -8,8 +8,8 @@ type Item {
 # ---
   i18n: [i18n]
   images: [Image!]
-  statements: [Statement!]
   introduction: [Paragraph!]
+  statements: [Statement!]
   logs: [Log!]
 # ---
   meta: Json
