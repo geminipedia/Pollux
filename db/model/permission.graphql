@@ -1,5 +1,5 @@
 type Access {
-  id: Int! @unique @id
+  id: UUID! @unique @id
 # ---
   read: Boolean! @default(value: false)
   write: Boolean! @default(value: false)
