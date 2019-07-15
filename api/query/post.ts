@@ -4,21 +4,21 @@ import log from '../util/log';
 import auth from '../auth';
 
 const postQuery = {
-  async post(_: any, args: PostWhereUniqueInput, context: Context): Promise<Post> {
+  async post(_: any, args: { where: PostWhereUniqueInput }, context: Context): Promise<Post> {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      const targetPost: Post = await prisma.post(args);
+      const targetPost: Post = await prisma.post(args.where);
 
       if (!targetPost) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'Post not found.',
+          result: '#ERR_P001: Post not found.',
           userId: viewer.id
         });
 
-        throw new Error('#ERR_P001');
+        return;
       }
 
       return targetPost;
@@ -26,7 +26,7 @@ const postQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: viewer.id
       });
 
@@ -34,20 +34,18 @@ const postQuery = {
     }
   },
 
-  async posts({ _, args, context }:
-    {
-      _: any;
-      args?: {
-        where?: PostWhereInput;
-        orderBy?: PostOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      };
-      context: Context;
-    }
+  async posts(
+    _: any,
+    args: {
+      where?: PostWhereInput;
+      orderBy?: PostOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context
   ): Promise<Post[]> {
     const viewer: User = await auth.token.parse(context.request);
 
@@ -57,7 +55,7 @@ const postQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: viewer.id
       });
 

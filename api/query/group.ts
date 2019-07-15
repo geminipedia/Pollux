@@ -4,34 +4,34 @@ import log from '../util/log';
 import auth from '../auth';
 
 const groupQuery = {
-  async group(_: any, args: GroupWhereUniqueInput, context: Context): Promise<Group> {
+  async group(_: any, args: { where: GroupWhereUniqueInput }, context: Context): Promise<Group> {
     const user: User = await auth.token.parse(context.request);
 
     try {
       const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().group().read() || await prisma.user({ id: user.id }).group().permission().group().anyone().read();
       const userGroup: Group = await prisma.user({ id: user.id }).group();
-      const targetGroup: Group = await prisma.group(args);
+      const targetGroup: Group = await prisma.group(args.where);
 
       if (!(accessable && userGroup.id === targetGroup.id)) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'Permission Deny.',
+          result: '#ERR_F000: Permission Deny.',
           userId: user.id
         });
 
-        throw new Error('#ERR_F000');
+        return;
       }
 
       if (!targetGroup) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'Group not found.',
+          result: '#ERR_G001: Group not found.',
           userId: user.id
         });
 
-        throw new Error('#ERR_I001');
+        return;
       }
 
       return targetGroup;
@@ -39,7 +39,7 @@ const groupQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: user.id
       });
 
@@ -47,10 +47,9 @@ const groupQuery = {
     }
   },
 
-  async groups({_, args, context}:
-    {
-      _: any;
-      args?: {
+  async groups(
+      _: any,
+      args: {
         where?: GroupWhereInput;
         orderBy?: GroupOrderByInput;
         skip?: number;
@@ -58,9 +57,8 @@ const groupQuery = {
         before?: string;
         first?: number;
         last?: number;
-      };
-      context: Context;
-    }
+      },
+      context: Context
   ): Promise<Group[]> {
     const user: User = await auth.token.parse(context.request);
 
@@ -71,19 +69,19 @@ const groupQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'Permission Deny.',
+          result: '#ERR_F000: Permission Deny.',
           userId: user.id
         });
 
-        throw new Error('#ERR_F000');
+        return;
       }
 
-      return await prisma.groups(args);
+      return await prisma.groups({ ...args });
     } catch (error) {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: user.id
       });
 

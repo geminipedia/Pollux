@@ -4,11 +4,11 @@ import log from '../util/log';
 import auth from '../auth';
 
 const propertyQuery = {
-  async property(_: any, args: PropertyWhereUniqueInput, context: Context): Promise<Property> {
+  async property(_: any, args: { where: PropertyWhereUniqueInput }, context: Context): Promise<Property> {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      return await prisma.property(args);
+      return await prisma.property(args.where);
     } catch (error) {
       // Write Log
       log.error({
@@ -21,20 +21,18 @@ const propertyQuery = {
     }
   },
 
-  async properties({ _, args, context }:
-    {
-      _: any;
-      args?: {
-        where?: PropertyWhereInput;
-        orderBy?: PropertyOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      };
-      context: Context;
-    }
+  async properties(
+    _: any,
+    args: {
+      where?: PropertyWhereInput;
+      orderBy?: PropertyOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context
   ): Promise<Property[]> {
     const viewer: User = await auth.token.parse(context.request);
 
@@ -44,7 +42,7 @@ const propertyQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: viewer.id
       });
 

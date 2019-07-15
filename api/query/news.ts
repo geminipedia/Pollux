@@ -4,21 +4,21 @@ import log from '../util/log';
 import auth from '../auth';
 
 const newsQuery = {
-  async news(_: any, args: NewsWhereUniqueInput, context: Context): Promise<News> {
+  async news(_: any, args: { where: NewsWhereUniqueInput }, context: Context): Promise<News> {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      const targetNews: News = await prisma.news(args);
+      const targetNews: News = await prisma.news(args.where);
 
       if (!targetNews) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'News not found.',
+          result: '#ERR_N001: News not found.',
           userId: viewer.id
         });
 
-        throw new Error('#ERR_N001');
+        return;
       }
 
       return targetNews;
@@ -26,7 +26,7 @@ const newsQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: viewer.id
       });
 

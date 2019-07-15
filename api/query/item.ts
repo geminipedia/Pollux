@@ -4,21 +4,21 @@ import log from '../util/log';
 import auth from '../auth';
 
 const itemQuery = {
-  async item(_: any, args: ItemWhereUniqueInput, context: Context): Promise<Item> {
+  async item(_: any, args: { where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      const targetItem: Item = await prisma.item(args);
+      const targetItem: Item = await prisma.item(args.where);
 
       if (!targetItem) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: 'Item not found.',
+          result: '#ERR_I001: Item not found.',
           userId: viewer.id
         });
 
-        throw new Error('#ERR_I001');
+        return;
       }
 
       return targetItem;
@@ -26,7 +26,7 @@ const itemQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
         userId: viewer.id
       });
 
@@ -34,23 +34,31 @@ const itemQuery = {
     }
   },
 
-  async items({ _, args }:
-    {
-      _: any;
-      args?: {
-        where?: ItemWhereInput;
-        orderBy?: ItemOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      };
-    }
+  async items(
+    _: any,
+    args: {
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context
   ): Promise<Item[]> {
+    const viewer: User = await auth.token.parse(context.request);
+
     try {
-      return await prisma.items(args);
+      return await prisma.items({ ...args });
     } catch (error) {
+      // Write Log
+      log.error({
+        ip: context.request.ip,
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
+        userId: viewer.id
+      });
+
       throw new Error(error.message || '#ERR_FFFF');
     }
   }
