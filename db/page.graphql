@@ -1,0 +1,40 @@
+enum PageType {
+  HOME,
+  MAIN,
+  SELF,
+  BOX,
+  ERROR
+}
+
+type PageHead {
+  id: UUID! @unique @id
+# ---
+  title: String!
+  meta: [PageMeta!] @relation(link: TABLE, name: "HeadToMeta")
+}
+
+type PageMeta {
+  id: UUID! @unique @id
+# ---
+  charset: String! @default(value: "UTF-8")
+  name: String
+  property: String
+  content: String
+}
+
+type Page {
+  id: UUID! @unique @id
+# ---
+  path: String! @unique
+  name: String! @unique
+  type: PageType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  label: [i18n!]
+  head: PageHead! @relation(link: INLINE, name: "PageHead")
+  layout: Theme! @relation(link: INLINE, name: "PageTheme")
+  creator: User! @relation(link: INLINE, name: "PageCreator")
+# ---
+  meta: Json
+}

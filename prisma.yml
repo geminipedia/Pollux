@@ -21,6 +21,7 @@ datamodel:
   - ./db/news.graphql
   - ./db/post.graphql
   - ./db/tag.graphql
+  - ./db/page.graphql
   - ./db/theme.graphql
 generate:
   - generator: typescript-client

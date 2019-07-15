@@ -7,5 +7,8 @@ type Theme {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
+  preview: [Image!] @relation(link: TABLE, name: "ThemeToImage")
+  creator: User! @relation(link: INLINE, name: "ThemeCreator")
+# ---
   meta: Json
 }
