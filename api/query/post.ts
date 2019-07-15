@@ -50,7 +50,7 @@ const postQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      return await prisma.posts(args);
+      return await prisma.posts({ ...args });
     } catch (error) {
       // Write Log
       log.error({

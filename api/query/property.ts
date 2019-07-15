@@ -37,7 +37,7 @@ const propertyQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      return await prisma.properties(args);
+      return await prisma.properties({ ...args });
     } catch (error) {
       // Write Log
       log.error({

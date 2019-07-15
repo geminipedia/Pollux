@@ -52,7 +52,7 @@ const newsQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      return await prisma.newses(args);
+      return await prisma.newses({ ...args });
     } catch (error) {
       // Write Log
       log.error({
