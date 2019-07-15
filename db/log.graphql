@@ -5,8 +5,8 @@ type Log {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  event: Event!
-  user: User!
+  event: Event! @relation(line: INLINE, name: "LogEvent")
+  user: User! @relation(line: INLINE, name: "LogUser")
 # ---
   meta: Json
 }

@@ -8,7 +8,7 @@ type File {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  uploadBy: User!
+  uploadBy: User! @relation(link: INLINE, name: "FileUploadBy")
 # ---
   meta: Json
 }

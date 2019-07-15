@@ -14,7 +14,7 @@ type Image {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  file: File
+  file: File @relation(link: INLINE, name: "ImageFile")
 # ---
   meta: Json
 }

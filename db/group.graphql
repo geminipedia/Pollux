@@ -4,7 +4,7 @@ type Group {
   name: String! @unique
   description: String
 # ---
-  permission: Permission!
+  permission: Permission! @relation(link: INLINE, name: "GroupsPermission")
 # ---
   meta: Json
 }

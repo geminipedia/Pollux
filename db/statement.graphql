@@ -7,7 +7,7 @@ type Statement {
   index: Int @default(value: 0)
 # ---
   i18n: [i18n!]
-  property: Property @relation(name: "StatementToProperty")
+  property: Property @relation(link: INLINE, name: "StatementToProperty")
   reference: Item
 # ---
   meta: Json

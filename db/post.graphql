@@ -7,9 +7,9 @@ type Post implements Article {
   updatedAt: DateTime!
   validUntil: DateTime!
 # ---
-  author: User!
-  banner: [Image!]
-  tags: [Tag!]
+  author: User! @relation(link: INLINE, name: "PostAuthor")
+  banner: [Image!] @relation(link: TABLE, name: "PostBanner")
+  tags: [Tag!] @relation(link: TABLE, name: "PostToTag")
 # ---
   meta: Json
 }

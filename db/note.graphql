@@ -5,8 +5,8 @@ type Note {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  user: User!
-  notes: [Note!]
+  user: User! @relation(line: INLINE, name: "NoteUser")
+  notes: [Note!] @relation(link: TABLE, name: "NoteToNote")
 # ---
   meta: Json
 }

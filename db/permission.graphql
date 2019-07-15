@@ -9,9 +9,9 @@ type Access {
 type PermissionType {
   id: UUID! @unique @id
 # ---
-  owner: Access! @relation(name: "OwnerAccess")
-  group: Access! @relation(name: "GroupAccess")
-  anyone: Access! @relation(name: "AnyoneAccess")
+  owner: Access! @relation(link: INLINE, name: "OwnerAccess")
+  group: Access! @relation(link: INLINE, name: "GroupAccess")
+  anyone: Access! @relation(link: INLINE, name: "AnyoneAccess")
 }
 
 type Permission {
@@ -21,16 +21,16 @@ type Permission {
   loginAdmin: Boolean! @default(value: false)
   banned: Boolean! @default(value: false)
 # ---
-  news: PermissionType! @relation(name: "NewsPermission")
-  post: PermissionType! @relation(name: "PostPermission")
-  reply: PermissionType! @relation(name: "ReplyPermission")
-  item: PermissionType! @relation(name: "ItemPermission")
-  property: PermissionType! @relation(name: "PropertyPermission")
-  user: PermissionType! @relation(name: "UserPermission")
-  group: PermissionType! @relation(name: "GroupPermission")
-  layout: PermissionType! @relation(name: "LayoutPermission")
-  log: PermissionType! @relation(name: "LogPermission")
-  analytics: PermissionType! @relation(name: "AnalyticsPermission")
+  news: PermissionType! @relation(link: INLINE, name: "NewsPermission")
+  post: PermissionType! @relation(link: INLINE, name: "PostPermission")
+  reply: PermissionType! @relation(link: INLINE, name: "ReplyPermission")
+  item: PermissionType! @relation(link: INLINE, name: "ItemPermission")
+  property: PermissionType! @relation(link: INLINE, name: "PropertyPermission")
+  user: PermissionType! @relation(link: INLINE, name: "UserPermission")
+  group: PermissionType! @relation(link: INLINE, name: "GroupPermission")
+  layout: PermissionType! @relation(link: INLINE, name: "LayoutPermission")
+  log: PermissionType! @relation(link: INLINE, name: "LogPermission")
+  analytics: PermissionType! @relation(link: INLINE, name: "AnalyticsPermission")
 # ---
   meta: Json
 }

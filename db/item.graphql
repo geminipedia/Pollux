@@ -6,11 +6,11 @@ type Item {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  i18n: [i18n]
-  images: [Image!]
-  introduction: [Paragraph!]
+  i18n: [i18n] @relation(link: TABLE, name: "ItemToI18n")
+  images: [Image!] @relation(link: TABLE, name: "ItemToImage")
+  introduction: [Paragraph!] @relation(link: TABLE, name: "ItemToIntroduction")
   statements: [Statement!]
-  logs: [Log!]
+  logs: [Log!] @relation(link: TABLE, name: "ItemToLog")
 # ---
   meta: Json
 }

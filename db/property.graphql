@@ -7,8 +7,8 @@ type Property {
   updatedAt: DateTime!
   description: String
 # ---
-  i18n: [i18n!]
-  logs: [Log!]
+  i18n: [i18n!] @relation(link: TABLE, name: "PropertyToI18n")
+  logs: [Log!] @relation(link: TABLE, name: "PropertyToLogs")
 # ---
   meta: Json
 }

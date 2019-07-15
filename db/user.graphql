@@ -10,7 +10,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  avatar: Image
+  avatar: Image @relation(line: INLINE, name: "UserAvatar")
   group: Group! @relation(link: INLINE, name: "UserGroup")
 # ---
   meta: Json

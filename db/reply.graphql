@@ -3,11 +3,11 @@ type Reply {
   replyId: Int! @unique       # Human-readable format
 # ---
   content: String!
-  user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
 # ---
-  replies: [Reply!]
+  user: User! @relation(link: INLINE, name: "ReplyUser")
+  replies: [Reply!] @relation(link: TABLE, name: "ReplyToReply")
 # ---
   meta: Json
 }

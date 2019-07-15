@@ -7,8 +7,9 @@ type News implements Article {
   updatedAt: DateTime!
   validUntil: DateTime!
 # ---
-  author: User!
-  banner: [Image!]
+  author: User! @relation(line: INLINE, name: "NewsAuthor")
+  banner: [Image!] @relation(line: TABLE, name: "NewsToBanner")
+  tags: [Tag!] @relation(link: TABLE, name: "NewsToTag")
 # ---
   meta: Json
 }
