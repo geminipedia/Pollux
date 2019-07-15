@@ -2,6 +2,8 @@ type Log {
   id: UUID! @unique @id
 # ---
   ip: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 # ---
   event: Event!
   user: User!
