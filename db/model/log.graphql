@@ -6,7 +6,7 @@ type Log {
   updatedAt: DateTime!
 # ---
   event: Event! @relation(line: INLINE, name: "LogEvent")
-  user: User! @relation(line: INLINE, name: "LogUser")
+  user: User @relation(line: INLINE, name: "LogUser")
 # ---
   meta: Json
 }
