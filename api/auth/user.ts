@@ -78,6 +78,9 @@ const user = {
       if (!userId) {
         const targetUser = await prisma.user({ email: userEmail });
         userId = targetUser.id;
+      } else if (!userEmail) {
+        const targetUser = await prisma.user({ id: userId });
+        userEmail = targetUser.email;
       }
 
       // Gen token and send it
