@@ -66,7 +66,7 @@ const user = {
       // Write Log
       await log.error({
         ip: req.ip,
-        result: `Cannot create user account.\n\nError: ${error}`
+        result: `Cannot create user account.\n\nError: ${error.message}`
       });
 
       throw new Error('ERR_FFFF');
@@ -101,7 +101,7 @@ const user = {
       // Write Log
       await log.error({
         ip: req.ip,
-        result: `Account ${userEmail} authorization failed.\n\nError: ${error}`,
+        result: `Account ${userEmail} authorization failed.\n\nError: ${error.message}`,
         userId
       });
 

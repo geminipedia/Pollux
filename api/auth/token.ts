@@ -1,4 +1,7 @@
 import { Request, Response } from 'express';
+import { prisma, User } from '../model';
+import { UserSignPayload } from '../types';
+import auth from '.';
 
 const token = {
   set: (res: Response, cookie: string): void => {
@@ -15,6 +18,11 @@ const token = {
 
   get: (req: Request): string => {
     return req.get('Authorization').split('Bearer ')[1];
+  },
+
+  parse: async (req: Request): Promise<User> => {
+    const userInfo: UserSignPayload = await auth.verify(token.get(req), req);
+    return await prisma.user({ id: userInfo.id });
   }
 };
 
