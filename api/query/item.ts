@@ -1,8 +1,8 @@
 import { Context } from 'graphql-yoga/dist/types';
-import { Item } from '../model/index';
+import { Item, ItemWhereUniqueInput, ItemWhereInput } from '../model';
 
 const itemQuery = {
-  async item(_, args, context: Context): Promise<Item> {
+  async item(_: any, args: ItemWhereUniqueInput, context: Context): Promise<Item> {
     try {
       const targetItem = await context.prisma.item(args);
 
@@ -14,7 +14,7 @@ const itemQuery = {
     }
   },
 
-  async items(_, args, context: Context): Promise<Item[]> {
+  async items(_: any, args: ItemWhereInput, context: Context): Promise<Item[]> {
     try {
       return await context.prisma.items(args);
     } catch (err) {
