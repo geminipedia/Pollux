@@ -11,6 +11,7 @@ import News from './news';
 import Paragraph from './paragraph';
 import Note from './note';
 import Quote from './quote';
+import Reply from './reply';
 import Log from './log';
 import Image from './image';
 import File from './file';
@@ -30,6 +31,7 @@ export default {
   Paragraph,
   Note,
   Quote,
+  Reply,
   Log,
   Image,
   File,
