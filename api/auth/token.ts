@@ -5,10 +5,10 @@ import auth from '.';
 
 const token = {
   set: (res: Response, cookie: string): void => {
-    res.header('Access-Control-Allow-Origin', 'https://mslib.tw');
+    res.header('Access-Control-Allow-Origin', `https://${process.env.SITE_DOMAIN}`);
     res.cookie('__TOKEN', cookie,
       {
-        domain: '.mslib.tw',
+        domain: `.${process.env.SITE_DOMAIN}`,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
         httpOnly: false,
         secure: true
