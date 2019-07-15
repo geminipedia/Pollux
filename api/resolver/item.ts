@@ -1,6 +1,10 @@
-import { prisma, Item, Image, Paragraph, Statement, Log, FragmentableArray } from '../model';
+import { prisma, Item, Image, Paragraph, Statement, Log, i18n, FragmentableArray } from '../model';
 
 const Item = {
+  i18n(parent: Item): FragmentableArray<i18n> {
+    return prisma.item({ id: parent.id }).i18n();
+  },
+
   images(parent: Item): FragmentableArray<Image> {
     return prisma.item({ id: parent.id }).images({ orderBy: 'createdAt_ASC' });
   },

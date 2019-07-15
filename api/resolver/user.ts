@@ -7,6 +7,10 @@ const User = {
 
   group(parent: User) {
     return prisma.user({ id: parent.id }).group();
+  },
+
+  logs(parent: User) {
+    return prisma.user({ id: parent.id }).logs();
   }
 };
 
