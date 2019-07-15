@@ -1,0 +1,14 @@
+type Admin implements Site {
+  id: UUID! @unique @id
+# ---
+  name: String!
+  domain: String!
+  public: Boolean! @default(value: false)
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  menu: [Pages!]!
+  access: [Group!]
+# ---
+  meta: Json
+}

@@ -1,0 +1,12 @@
+type Site implements Core {
+  id: UUID! @unique @id
+# ---
+  name: String!
+  domain: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+# ---
+  menu: [Pages!]!
+# ---
+  meta: Json
+}

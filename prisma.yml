@@ -1,28 +1,31 @@
 endpoint: http://localhost:4466
 datamodel:
-  - ./db/event.graphql
-  - ./db/log.graphql
-  - ./db/user.graphql
-  - ./db/group.graphql
-  - ./db/permission.graphql
-  - ./db/i18n.graphql
-  - ./db/lang.graphql
-  - ./db/file.graphql
-  - ./db/image.graphql
-  - ./db/item.graphql
-  - ./db/property.graphql
-  - ./db/statement.graphql
-  - ./db/paragraph.graphql
-  - ./db/markup.graphql
-  - ./db/quote.graphql
-  - ./db/reply.graphql
-  - ./db/note.graphql
-  - ./db/article.graphql
-  - ./db/news.graphql
-  - ./db/post.graphql
-  - ./db/tag.graphql
-  - ./db/page.graphql
-  - ./db/theme.graphql
+  - ./db/model/event.graphql
+  - ./db/model/log.graphql
+  - ./db/model/user.graphql
+  - ./db/model/group.graphql
+  - ./db/model/permission.graphql
+  - ./db/model/i18n.graphql
+  - ./db/model/lang.graphql
+  - ./db/model/file.graphql
+  - ./db/model/image.graphql
+  - ./db/model/item.graphql
+  - ./db/model/property.graphql
+  - ./db/model/statement.graphql
+  - ./db/model/paragraph.graphql
+  - ./db/model/markup.graphql
+  - ./db/model/quote.graphql
+  - ./db/model/reply.graphql
+  - ./db/model/note.graphql
+  - ./db/model/article.graphql
+  - ./db/model/news.graphql
+  - ./db/model/post.graphql
+  - ./db/model/tag.graphql
+  - ./db/service/core.graphql
+  - ./db/service/admin.graphql
+  - ./db/service/site.graphql
+  - ./db/service/page.graphql
+  - ./db/service/theme.graphql
 generate:
   - generator: typescript-client
     output: ./api/model
