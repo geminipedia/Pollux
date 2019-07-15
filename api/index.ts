@@ -11,6 +11,7 @@ import { prisma } from './model';
 import Query from './query';
 import Mutation from './mutation';
 import Resolver from './resolver';
+import auth from './auth';
 
 const server = new GraphQLServer({
   typeDefs,
@@ -53,54 +54,14 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    callbackURL: '/googleOAuthCallback'
+    callbackURL: '/googleOAuthCallback',
+    passReqToCallback: true
   },
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      const userExisted = await prisma.user({ userName: profile.id });
-      if (userExisted) {
-        done(null, userExisted);
-        return userExisted;
-      }
+  async (req, accessToken, refreshToken, profile, done) => {
 
-      await prisma.createUser({
-        userName: profile.id,
-        email: profile.emails[0].value,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName
-      });
+    await auth.user.signUp(req, profile);
 
-      const user = await prisma.updateUser({
-        data: {
-          avatar: {
-            create: {
-              name: profile.photos[0].value,
-              file: {
-                create: {
-                  name: profile.photos[0].value,
-                  path: profile.photos[0].value,
-                  uploadBy: {
-                    connect: {
-                      userName: profile.id
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        where: {
-          userName: profile.id
-        }
-      });
-
-      done(null, profile);
-
-      return user;
-    } catch (error) {
-      done(error, null);
-      throw new Error('#ERR_FFFF');
-    }
+    done(null, profile);
   }
 ));
 
