@@ -1,15 +1,15 @@
-import { prisma, User } from '../model';
+import { prisma, User, Image, Group, Log, FragmentableArray } from '../model';
 
 const User = {
-  avatar(parent: User) {
+  avatar(parent: User): FragmentableArray<Image> {
     return prisma.user({ id: parent.id }).avatar();
   },
 
-  group(parent: User) {
+  group(parent: User): FragmentableArray<Group> {
     return prisma.user({ id: parent.id }).group();
   },
 
-  logs(parent: User) {
+  logs(parent: User): FragmentableArray<Log> {
     return prisma.user({ id: parent.id }).logs();
   }
 };
