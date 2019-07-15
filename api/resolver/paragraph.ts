@@ -1,5 +1,4 @@
-import { prisma, Paragraph, FragmentableArray, Markup, Reply } from '../model';
-import { Quote } from '../model/index';
+import { prisma, Paragraph, Markup, Reply, Quote, FragmentableArray } from '../model';
 
 const Paragraph = {
   markup(parent: Paragraph): FragmentableArray<Markup> {

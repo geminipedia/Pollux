@@ -1,4 +1,4 @@
-import { prisma, Property, i18n, FragmentableArray, Log } from '../model/index';
+import { prisma, Property, i18n, Log, FragmentableArray } from '../model/index';
 
 const Property = {
   i18n(parent: Property): FragmentableArray<i18n> {
