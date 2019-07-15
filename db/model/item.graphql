@@ -9,7 +9,7 @@ type Item {
   i18n: [i18n] @relation(link: TABLE, name: "ItemToI18n")
   images: [Image!] @relation(link: TABLE, name: "ItemToImage")
   introduction: [Paragraph!] @relation(link: TABLE, name: "ItemToIntroduction")
-  statements: [Statement!]
+  statements: [Statement!] @relation(link: TABLE, name: "ItemToStatement")
   logs: [Log!] @relation(link: TABLE, name: "ItemToLog")
 # ---
   meta: Json

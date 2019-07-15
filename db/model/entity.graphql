@@ -1,0 +1,13 @@
+type Entity {
+  id: UUID! @unique @id
+# ---
+  value: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+# ---
+  i18n: [i18n!]
+  reference: Item @relation(type: INLINE, name: "ReferenceToItem")
+  logs: [Log!] @relation(link: TABLE, name: "EntityToLog")
+# ---
+  meta: Json
+}

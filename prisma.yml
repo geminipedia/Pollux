@@ -12,6 +12,7 @@ datamodel:
   - ./db/model/item.graphql
   - ./db/model/property.graphql
   - ./db/model/statement.graphql
+  - ./db/model/entity.graphql
   - ./db/model/paragraph.graphql
   - ./db/model/markup.graphql
   - ./db/model/quote.graphql

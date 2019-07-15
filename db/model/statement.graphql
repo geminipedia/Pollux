@@ -1,14 +1,10 @@
 type Statement {
   id: UUID! @unique @id
 # ---
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  value: String!
   index: Int @default(value: 0)
 # ---
-  i18n: [i18n!]
-  property: Property @relation(link: INLINE, name: "StatementToProperty")
-  reference: Item
+  entity: Entity! @relation(link: INLINE, name: "StatementToEntity")
+  property: Property! @relation(link: INLINE, name: "StatementToProperty")
 # ---
   meta: Json
 }
