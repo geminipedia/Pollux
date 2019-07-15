@@ -1,7 +1,9 @@
 import itemQuery from './item';
+import postQuery from './post';
 
 const Query = {
-  ...itemQuery
+  ...itemQuery,
+  ...postQuery
 };
 
 export default Query;
