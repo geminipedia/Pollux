@@ -18,6 +18,7 @@ import File from './file';
 import i18n from './i18n';
 import Site from './site';
 import Admin from './admin';
+import { Page, PageHead } from './page';
 
 export default {
   Item,
@@ -39,5 +40,7 @@ export default {
   File,
   i18n,
   Site,
-  Admin
+  Admin,
+  Page,
+  PageHead
 };
