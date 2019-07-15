@@ -8,7 +8,7 @@ const itemQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
-      const targetItem = await prisma.item(args);
+      const targetItem: Item = await prisma.item(args);
 
       if (!targetItem) {
         // Write Log
