@@ -5,7 +5,7 @@ const Statement = {
     return prisma.statement({ id: parent.id }).i18n();
   },
 
-  properity(parent: Statement): FragmentableArray<Property> {
+  property(parent: Statement): FragmentableArray<Property> {
     return prisma.statement({ id: parent.id }).property();
   },
 
