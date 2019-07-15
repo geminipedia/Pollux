@@ -11,6 +11,8 @@ type Image {
   name: String!
   description: String
   format: Measurement
+  createdAt: DateTime!
+  updatedAt: DateTime!
 # ---
   file: File
 # ---
