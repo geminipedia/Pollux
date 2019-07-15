@@ -16,6 +16,7 @@ import Log from './log';
 import Image from './image';
 import File from './file';
 import i18n from './i18n';
+import Site from './site';
 
 export default {
   Item,
@@ -35,5 +36,6 @@ export default {
   Log,
   Image,
   File,
-  i18n
+  i18n,
+  Site
 };
