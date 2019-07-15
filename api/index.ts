@@ -54,7 +54,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    callbackURL: '/googleOAuthCallback',
+    callbackURL: `https://api.${process.env.SITE_DOMAIN}/googleOAuthCallback`,
     passReqToCallback: true
   },
   async (req, accessToken, refreshToken, profile, done) => {
@@ -69,7 +69,7 @@ server.express.get('/googleOAuth', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 server.express.get('/googleOAuthCallback', passport.authenticate('google'), (req, res) => {
-  res.redirect('https://mslib.tw');
+  res.redirect(`https://${process.env.SITE_DOMAIN}`);
 });
 
 server.start({ port: process.env.API_PORT }, () => console.log(`Server is running on http://localhost:${process.env.API_PORT}`));
