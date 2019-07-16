@@ -20,18 +20,6 @@ interface AccessPayload {
   delete: boolean;
 }
 
-interface AccessPayloadPromise {
-  read: () => Promise<boolean>;
-  write: () => Promise<boolean>;
-  delete: () => Promise<boolean>;
-}
-
-interface PermissionTypePayloadPromise {
-  owner: <T = AccessPayloadPromise>() => T;
-  group: <T = AccessPayloadPromise>() => T;
-  anyone: <T = AccessPayloadPromise>() => T;
-}
-
 type AccessKeyType =
   'read' |
   'write' |
@@ -82,13 +70,22 @@ const group = {
   permission: {
     $expand: async (user: User, key: PermissionKeyType):
       Promise<PermissionTypePayload> => {
-      const targetPermission: PermissionPromise = group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission());
-      const targetPermissionType: PermissionTypePayloadPromise = group.permission.$nested.apply(null, [targetPermission, 'owner', 'group', 'anyone']);
-
       return {
-        owner: await group.permission.$nested.apply(null, [targetPermissionType.owner, 'read', 'write', 'delete']),
-        group: await group.permission.$nested.apply(null, [targetPermissionType.group, 'read', 'write', 'delete']),
-        anyone: await group.permission.$nested.apply(null, [targetPermissionType.anyone, 'read', 'write', 'delete'])
+        owner: {
+          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+        },
+        group: {
+          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+        },
+        anyone: {
+          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
+          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+        }
       };
     },
 
@@ -97,18 +94,6 @@ const group = {
       callback: PermissionPromise | PermissionTypePromise | AccessPromise
     ): PermissionTypePromise | AccessPromise => {
       return callback[key]();
-    },
-
-    $nested: (
-      callback: PermissionPromise | PermissionTypePromise | AccessPromise,
-      ...args: PermissionTypeKeyType[] | AccessKeyType[]
-    ): PermissionTypePromise | AccessPromise => {
-      const result = Object.create(null);
-      Array.from(args).forEach(key => {
-        result[key] = group.permission.$queryDeliver.call(null, key, callback);
-      });
-
-      return result;
     }
   },
 
