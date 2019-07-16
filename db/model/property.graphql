@@ -9,6 +9,7 @@ type Property {
 # ---
   i18n: [i18n!] @relation(link: TABLE, name: "PropertyToI18n")
   logs: [Log!] @relation(link: TABLE, name: "PropertyToLog")
+  creator: User! @relation(link: INLINE, name: "PropertyCreator")
 # ---
   meta: Json
 }

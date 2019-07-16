@@ -11,6 +11,7 @@ type Item {
   introduction: [Paragraph!] @relation(link: TABLE, name: "ItemToIntroduction")
   statements: [Statement!] @relation(link: TABLE, name: "ItemToStatement")
   logs: [Log!] @relation(link: TABLE, name: "ItemToLog")
+  creator: User! @relation(link: INLINE, name: "ItemCreator")
 # ---
   meta: Json
 }
