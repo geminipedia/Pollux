@@ -1,4 +1,27 @@
-import { prisma, User, PermissionPromise, PermissionTypePromise, AccessPromise } from '../model';
+import {
+  prisma,
+  PermissionPromise,
+  PermissionTypePromise,
+  AccessPromise,
+  User,
+  UserPromise,
+  Post,
+  PostPromise,
+  News,
+  NewsPromise,
+  Reply,
+  ReplyPromise,
+  Item,
+  ItemPromise,
+  Property,
+  PropertyPromise,
+  Group,
+  GroupPromise,
+  Theme,
+  ThemePromise,
+  Log,
+  LogPromise
+} from '../model';
 
 interface AccessPayload {
   read: boolean;
@@ -10,12 +33,6 @@ interface AccessPayloadPromise {
   read: () => Promise<boolean>;
   write: () => Promise<boolean>;
   delete: () => Promise<boolean>;
-}
-
-export interface PermissionTypePayload {
-  owner: AccessPayload;
-  group: AccessPayload;
-  anyone: AccessPayload;
 }
 
 interface PermissionTypePayloadPromise {
@@ -49,6 +66,29 @@ type PermissionKeyType =
   'analytics'
   ;
 
+export interface PermissionTypePayload {
+  owner: AccessPayload;
+  group: AccessPayload;
+  anyone: AccessPayload;
+}
+
+export interface RelationPayload {
+  isOwner: boolean;
+  isMember: boolean;
+}
+
+const userFieldPair = {
+  news: 'author',
+  post: 'author',
+  reply: 'user',
+  item: 'creator',
+  property: 'creator',
+  theme: 'creator',
+  log: 'user',
+  user: 'self',
+  group: 'self'
+};
+
 const group = {
   permission: {
     $expand: async (user: User, key: PermissionKeyType):
@@ -80,6 +120,49 @@ const group = {
       });
 
       return result;
+    }
+  },
+
+  relation: {
+    $check: async (
+      user: User,
+      targetId: News['id'] | Post['id'] | Reply['id'] | Item['id'] | Property['id'] | User['id'] | Group['id'] | Theme['id'] | Log['id'],
+      key: PermissionKeyType
+    ): Promise<RelationPayload> => {
+      const userGroup: Group = await prisma.user({ id: user.id }).group();
+      switch (key) {
+        case 'user':
+          const targetGroup: Group = await prisma.user({ id: targetId }).group();
+          return {
+            isOwner: group.relation.$match(user.id, targetId),
+            isMember: group.relation.$match(userGroup.id, targetGroup.id)
+          };
+        case 'group':
+          return {
+            isOwner: group.relation.$match(userGroup.id, targetId),
+            isMember: group.relation.$match(userGroup.id, targetId)
+          };
+        default:
+          const { targetOwner, targetOwnerGroup }: { targetOwner: User, targetOwnerGroup: Group } = await group.relation.$handler.call(null, key, targetId);
+          return {
+            isOwner: group.relation.$match(user.id, targetOwner.id),
+            isMember: group.relation.$match(userGroup.id, targetOwnerGroup.id)
+          };
+      }
+    },
+
+    $handler: async (
+      key: PermissionKeyType,
+      targetId: News['id'] | Post['id'] | Reply['id'] | Item['id'] | Property['id'] | Theme['id'] | Log['id']
+    ): Promise<{ user: User, group: Group }> => {
+      return {
+        user: await prisma[key]({ id: targetId })[userFieldPair[key]](),
+        group: await prisma[key]({ id: targetId })[userFieldPair[key]]().group()
+      };
+    },
+
+    $match: (id: User['id'] | Group['id'], compareId: User['id'] | Group['id']): boolean => {
+      return id === compareId;
     }
   }
 };
