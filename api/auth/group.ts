@@ -4,23 +4,14 @@ import {
   PermissionTypePromise,
   AccessPromise,
   User,
-  UserPromise,
   Post,
-  PostPromise,
   News,
-  NewsPromise,
   Reply,
-  ReplyPromise,
   Item,
-  ItemPromise,
   Property,
-  PropertyPromise,
   Group,
-  GroupPromise,
   Theme,
-  ThemePromise,
-  Log,
-  LogPromise
+  Log
 } from '../model';
 
 interface AccessPayload {
