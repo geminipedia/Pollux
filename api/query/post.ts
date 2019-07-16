@@ -72,6 +72,10 @@ const postQuery = {
       const queriedPosts: Post[] = await prisma.posts({ ...args });
       const result: Post[] = [];
 
+      if (permission.anyone.read) {
+        return queriedPosts;
+      }
+
       queriedPosts.forEach(async post => {
         if (post.published) {
           result.push(post);
@@ -79,7 +83,7 @@ const postQuery = {
         }
         // Filter out content that you don't have permission to browse.
         const relation: RelationPayload = await group.relation.$check(viewer, post.id, 'post');
-        if (permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
+        if ((permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
           result.push(post);
         }
         return;

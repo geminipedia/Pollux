@@ -70,27 +70,20 @@ const groupQuery = {
       const queriedGroups: Group[] = await prisma.groups({ ...args });
       const result: Group[] = [];
 
+      if (permission.anyone.read) {
+        return queriedGroups;
+      }
+
       queriedGroups.forEach(async groupData => {
         // Filter out content that you don't have permission to browse.
         const relation: RelationPayload = await group.relation.$check(user, groupData.id, 'group');
-        if (permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
+        if ((permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
           result.push(groupData);
         }
         return;
       });
 
-      if (!permission.anyone.read) {
-        // Write Log
-        log.warn({
-          ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
-          userId: user.id
-        });
-
-        return;
-      }
-
-      return await prisma.groups({ ...args });
+      return result;
     } catch (error) {
       // Write Log
       log.error({

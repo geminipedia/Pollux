@@ -70,10 +70,14 @@ const logQuery = {
       const queriedLogs: Log[] = await prisma.logs({ ...args });
       const result: Log[] = [];
 
+      if (permission.anyone.read) {
+        return queriedLogs;
+      }
+
       queriedLogs.forEach(async logData => {
         // Filter out content that you don't have permission to browse.
         const relation: RelationPayload = await group.relation.$check(user, logData.id, 'log');
-        if (permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
+        if ((permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
           result.push(logData);
         }
         return;
