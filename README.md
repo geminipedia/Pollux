@@ -1,6 +1,6 @@
 # Pollux
 
-A flexable Web API Server for Project Gemini.
+A flexible Web API Server for Project Gemini.
 
 - based on `Prisma`
 
