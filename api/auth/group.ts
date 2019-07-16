@@ -132,10 +132,10 @@ const group = {
             isMember: group.relation.$match(userGroup.id, targetId)
           };
         default:
-          const target = await group.relation.$handler.call(null, key, targetId);
+          const target: { user: User, group: Group } = await group.relation.$handler.call(null, key, targetId);
           return {
-            isOwner: group.relation.$match(user.id, target.user.id),
-            isMember: group.relation.$match(userGroup.id, target.group.id)
+            isOwner: target.user ? group.relation.$match(user.id, target.user.id) : false,
+            isMember: target.group ? group.relation.$match(userGroup.id, target.group.id) : false
           };
       }
     },
