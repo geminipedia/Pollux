@@ -1,19 +1,20 @@
 import { Context } from 'graphql-yoga/dist/types';
+
 import { prisma, Group, GroupWhereInput, GroupOrderByInput, GroupWhereUniqueInput, User } from '../model';
+import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
-import group, { PermissionTypePayload } from '../auth/group';
 
 const groupQuery = {
   async group(_: any, args: { where: GroupWhereUniqueInput }, context: Context): Promise<Group> {
     const user: User = await auth.token.parse(context.request);
 
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
-      const userGroup: Group = await prisma.user({ id: user.id }).group();
       const targetGroup: Group = await prisma.group(args.where);
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
+      const relation: RelationPayload = await group.relation.$check(user, targetGroup.id, 'group');
 
-      if (!(permission.anyone.read || (permission.group.read && userGroup.id === targetGroup.id))) {
+      if (!(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
         log.warn({
           ip: context.request.ip,
@@ -65,6 +66,18 @@ const groupQuery = {
 
     try {
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
+
+      const queriedGroups: Group[] = await prisma.groups({ ...args });
+      const result: Group[] = [];
+
+      queriedGroups.forEach(async groupData => {
+        // Filter out content that you don't have permission to browse.
+        const relation: RelationPayload = await group.relation.$check(user, groupData.id, 'group');
+        if (permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
+          result.push(groupData);
+        }
+        return;
+      });
 
       if (!permission.anyone.read) {
         // Write Log

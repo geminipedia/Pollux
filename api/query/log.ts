@@ -1,21 +1,20 @@
 import { Context } from 'graphql-yoga/dist/types';
-import { prisma, Log, LogWhereUniqueInput, LogWhereInput, LogOrderByInput, User, Group } from '../model';
+
+import { prisma, Log, LogWhereUniqueInput, LogWhereInput, LogOrderByInput, User } from '../model';
+import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
-import group, { PermissionTypePayload } from '../auth/group';
 
 const logQuery = {
   async log(_: any, args: { where: LogWhereUniqueInput }, context: Context): Promise<Log> {
     const user: User = await auth.token.parse(context.request);
 
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
       const targetLog: Log = await prisma.log(args.where);
-      const targetLogOwner: User = await prisma.log(args.where).user();
-      const targetLogOwnerGroup: Group = await prisma.log(args.where).user().group();
-      const userGroup: Group = await prisma.user({ id: user.id }).group();
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
+      const relation: RelationPayload = await group.relation.$check(user, targetLog.id, 'log');
 
-      if (!(permission.anyone.read || (permission.group.read && targetLogOwnerGroup.id === userGroup.id) || (permission.owner.read && targetLogOwner.id === user.id))) {
+      if (!(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
         log.warn({
           ip: context.request.ip,
@@ -68,18 +67,19 @@ const logQuery = {
     try {
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
 
-      if (!permission.anyone.read) {
-        // Write Log
-        log.warn({
-          ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
-          userId: user.id
-        });
+      const queriedLogs: Log[] = await prisma.logs({ ...args });
+      const result: Log[] = [];
 
+      queriedLogs.forEach(async logData => {
+        // Filter out content that you don't have permission to browse.
+        const relation: RelationPayload = await group.relation.$check(user, logData.id, 'log');
+        if (permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner)) {
+          result.push(logData);
+        }
         return;
-      }
+      });
 
-      return await prisma.logs({ ...args });
+      return result;
     } catch (error) {
       // Write Log
       log.error({

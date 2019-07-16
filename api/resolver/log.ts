@@ -1,4 +1,4 @@
-import { prisma, Log, Image, Paragraph, Reply, Tag, User, FragmentableArray } from '../model';
+import { prisma, Log, Image, User, FragmentableArray } from '../model';
 
 const Log = {
   event(parent: Log): FragmentableArray<Image> {

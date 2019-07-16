@@ -1,4 +1,4 @@
-import { prisma, Statement, i18n, Entity, Property, FragmentableArray } from '../model';
+import { prisma, Statement, Entity, Property, FragmentableArray } from '../model';
 
 const Statement = {
   property(parent: Statement): FragmentableArray<Property> {
