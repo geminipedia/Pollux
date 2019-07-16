@@ -7,7 +7,7 @@ type Property {
   updatedAt: DateTime! @updatedAt
   description: String
 # ---
-  i18n: [i18n!] @relation(link: TABLE, name: "PropertyToI18n")
+  i18n: [i18n!] @relation(link: TABLE, name: "PropertyToI18n", onDelete: CASCADE)
   logs: [Log!] @relation(link: TABLE, name: "PropertyToLog")
   creator: User! @relation(link: INLINE, name: "PropertyCreator")
 # ---

@@ -6,7 +6,7 @@ type Note {
   updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(line: INLINE, name: "NoteUser")
-  notes: [Note!] @relation(link: TABLE, name: "NoteToNote")
+  notes: [Note!] @relation(link: TABLE, name: "NoteToNote", onDelete: CASCADE)
 # ---
   meta: Json
 }

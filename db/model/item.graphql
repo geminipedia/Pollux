@@ -6,10 +6,10 @@ type Item {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 # ---
-  i18n: [i18n] @relation(link: TABLE, name: "ItemToI18n")
+  i18n: [i18n] @relation(link: TABLE, name: "ItemToI18n", onDelete: CASCADE)
   images: [Image!] @relation(link: TABLE, name: "ItemToImage")
-  introduction: [Paragraph!] @relation(link: TABLE, name: "ItemToIntroduction")
-  statements: [Statement!] @relation(link: TABLE, name: "ItemToStatement")
+  introduction: [Paragraph!] @relation(link: TABLE, name: "ItemToIntroduction", onDelete: CASCADE)
+  statements: [Statement!] @relation(link: TABLE, name: "ItemToStatement", onDelete: CASCADE)
   logs: [Log!] @relation(link: TABLE, name: "ItemToLog")
   creator: User! @relation(link: INLINE, name: "ItemCreator")
 # ---

@@ -8,9 +8,9 @@ type News implements Article {
   validUntil: DateTime!
 # ---
   author: User! @relation(line: INLINE, name: "NewsAuthor")
-  banner: [Image!] @relation(line: TABLE, name: "NewsToBanner")
-  paragraphs: [Paragraph!] @relation(link: TABLE, name: "NewsToParagraph")
-  replies: [Reply!] @relation(link: TABLE, name: "NewsToReply")
+  banner: [Image!] @relation(line: TABLE, name: "NewsToBanner", onDelete: CASCADE)
+  paragraphs: [Paragraph!] @relation(link: TABLE, name: "NewsToParagraph", onDelete: CASCADE)
+  replies: [Reply!] @relation(link: TABLE, name: "NewsToReply", onDelete: CASCADE)
   tags: [Tag!] @relation(link: TABLE, name: "NewsToTag")
 # ---
   meta: Json

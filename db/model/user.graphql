@@ -10,7 +10,7 @@ type User {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 # ---
-  avatar: Image @relation(line: INLINE, name: "UserAvatar")
+  avatar: Image @relation(line: INLINE, name: "UserAvatar", onDelete: CASCADE)
   group: Group! @relation(link: INLINE, name: "UserGroup")
   logs: [Log!] @relation(link: TABLE, name: "UserToLog")
 # ---

@@ -3,7 +3,7 @@ type Statement {
 # ---
   index: Int @default(value: 0)
 # ---
-  entity: Entity! @relation(link: INLINE, name: "StatementToEntity")
+  entity: Entity! @relation(link: INLINE, name: "StatementToEntity", onDelete: CASCADE)
   property: Property! @relation(link: INLINE, name: "StatementToProperty")
 # ---
   meta: Json

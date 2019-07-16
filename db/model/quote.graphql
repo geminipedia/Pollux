@@ -14,7 +14,7 @@ type Quote {
   updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(line: INLINE, name: "QuoteUser")
-  notes: [Note!] @relation(line: TABLE, name: "QuoteToNote")
+  notes: [Note!] @relation(line: TABLE, name: "QuoteToNote", onDelete: CASCADE)
   replies: [Reply!] @relation(line: TABLE, name: "QuoteToReply")
 # ---
   meta: Json

@@ -8,9 +8,9 @@ type Post implements Article {
   validUntil: DateTime!
 # ---
   author: User! @relation(link: INLINE, name: "PostAuthor")
-  banner: [Image!] @relation(link: TABLE, name: "PostBanner")
-  paragraphs: [Paragraph!] @relation(link: TABLE, name: "PostToParagraph")
-  replies: [Reply!] @relation(link: TABLE, name: "PostToReply")
+  banner: [Image!] @relation(link: TABLE, name: "PostBanner", onDelete: CASCADE)
+  paragraphs: [Paragraph!] @relation(link: TABLE, name: "PostToParagraph", onDelete: CASCADE)
+  replies: [Reply!] @relation(link: TABLE, name: "PostToReply", onDelete: CASCADE)
   tags: [Tag!] @relation(link: TABLE, name: "PostToTag")
 # ---
   meta: Json

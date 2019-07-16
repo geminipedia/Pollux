@@ -7,7 +7,7 @@ type Reply {
   updatedAt: DateTime! @updatedAt
 # ---
   user: User! @relation(link: INLINE, name: "ReplyUser")
-  replies: [Reply!] @relation(link: TABLE, name: "ReplyToReply")
+  replies: [Reply!] @relation(link: TABLE, name: "ReplyToReply", onDelete: CASCADE)
 # ---
   meta: Json
 }

@@ -15,9 +15,9 @@ type Paragraph {
   text: String
   type: ParagraphType
 # ---
-  markup: [Markup!] @relation(line: TABLE, name: "ParagraphToMarkup")
-  quotes: [Quote!] @relation(line: TABLE, name: "ParagraphToQuote")
-  replies: [Reply!] @relation(line: TABLE, name: "ParagraphToReply")
+  markup: [Markup!] @relation(line: TABLE, name: "ParagraphToMarkup", onDelete: CASCADE)
+  quotes: [Quote!] @relation(line: TABLE, name: "ParagraphToQuote", onDelete: CASCADE)
+  replies: [Reply!] @relation(line: TABLE, name: "ParagraphToReply", onDelete: CASCADE)
 # ---
   meta: Json
 }
