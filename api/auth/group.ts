@@ -53,13 +53,13 @@ const group = {
   permission: {
     $expand: async (user: User, key: PermissionKeyType):
       Promise<PermissionTypePayload> => {
-      const targetPermission: PermissionPromise = group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())();
+      const targetPermission: PermissionPromise = group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission());
       const targetPermissionType: PermissionTypePayloadPromise = group.permission.$nested.apply(null, [targetPermission, 'owner', 'group', 'anyone']);
 
       return {
-        owner: await group.permission.$nested.apply(null, [targetPermissionType.owner, 'read', 'write', 'delete'])(),
-        group: await group.permission.$nested.apply(null, [targetPermissionType.group, 'read', 'write', 'delete'])(),
-        anyone: await group.permission.$nested.apply(null, [targetPermissionType.anyone, 'read', 'write', 'delete'])()
+        owner: await group.permission.$nested.apply(null, [targetPermissionType.owner, 'read', 'write', 'delete']),
+        group: await group.permission.$nested.apply(null, [targetPermissionType.group, 'read', 'write', 'delete']),
+        anyone: await group.permission.$nested.apply(null, [targetPermissionType.anyone, 'read', 'write', 'delete'])
       };
     },
 
@@ -76,7 +76,7 @@ const group = {
     ): PermissionTypePromise | AccessPromise => {
       const result = Object.create(null);
       Array.from(args).forEach(key => {
-        result[key] = group.permission.$queryDeliver.call(null, key, callback)();
+        result[key] = group.permission.$queryDeliver.call(null, key, callback);
       });
 
       return result;
