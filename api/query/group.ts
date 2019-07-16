@@ -2,17 +2,18 @@ import { Context } from 'graphql-yoga/dist/types';
 import { prisma, Group, GroupWhereInput, GroupOrderByInput, GroupWhereUniqueInput, User } from '../model';
 import log from '../util/log';
 import auth from '../auth';
+import group, { PermissionTypePayload } from '../auth/group';
 
 const groupQuery = {
   async group(_: any, args: { where: GroupWhereUniqueInput }, context: Context): Promise<Group> {
     const user: User = await auth.token.parse(context.request);
 
     try {
-      const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().group().read() || await prisma.user({ id: user.id }).group().permission().group().anyone().read();
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
       const userGroup: Group = await prisma.user({ id: user.id }).group();
       const targetGroup: Group = await prisma.group(args.where);
 
-      if (!(accessable && userGroup.id === targetGroup.id)) {
+      if (!(permission.anyone.read || (permission.group.read && userGroup.id === targetGroup.id))) {
         // Write Log
         log.warn({
           ip: context.request.ip,
@@ -63,9 +64,9 @@ const groupQuery = {
     const user: User = await auth.token.parse(context.request);
 
     try {
-      const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().anyone().read();
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
 
-      if (!accessable) {
+      if (!permission.anyone.read) {
         // Write Log
         log.warn({
           ip: context.request.ip,
