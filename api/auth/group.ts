@@ -139,7 +139,7 @@ const group = {
           };
         case 'group':
           return {
-            isOwner: group.relation.$match(userGroup.id, targetId),
+            isOwner: false, // You haven't any group. "WE" have.
             isMember: group.relation.$match(userGroup.id, targetId)
           };
         default:
