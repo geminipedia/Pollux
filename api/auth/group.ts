@@ -72,19 +72,127 @@ const group = {
       Promise<PermissionTypePayload> => {
       return {
         owner: {
-          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'owner', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+          read: await group.permission.$queryDeliver.call(
+            null,
+            'read',
+            group.permission.$queryDeliver.call(
+              null,
+              'owner',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          write: await group.permission.$queryDeliver.call(
+            null,
+            'write',
+            group.permission.$queryDeliver.call(
+              null,
+              'owner',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          delete: await group.permission.$queryDeliver.call(
+            null,
+            'delete',
+            group.permission.$queryDeliver.call(
+              null,
+              'owner',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          )
         },
         group: {
-          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'group', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+          read: await group.permission.$queryDeliver.call(
+            null,
+            'read',
+            group.permission.$queryDeliver.call(
+              null,
+              'group',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          write: await group.permission.$queryDeliver.call(
+            null,
+            'write',
+            group.permission.$queryDeliver.call(
+              null,
+              'group',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          delete: await group.permission.$queryDeliver.call(
+            null,
+            'delete',
+            group.permission.$queryDeliver.call(
+              null,
+              'group',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          )
         },
         anyone: {
-          read: await group.permission.$queryDeliver.call(null, 'read', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          write: await group.permission.$queryDeliver.call(null, 'write', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission()))),
-          delete: await group.permission.$queryDeliver.call(null, 'delete', group.permission.$queryDeliver.call(null, 'anyone', group.permission.$queryDeliver.call(null, key, prisma.user({ id: user.id }).group().permission())))
+          read: await group.permission.$queryDeliver.call(
+            null,
+            'read',
+            group.permission.$queryDeliver.call(
+              null,
+              'anyone',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          write: await group.permission.$queryDeliver.call(
+            null,
+            'write',
+            group.permission.$queryDeliver.call(
+              null,
+              'anyone',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          ),
+          delete: await group.permission.$queryDeliver.call(
+            null,
+            'delete',
+            group.permission.$queryDeliver.call(
+              null,
+              'anyone',
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id: user.id }).group().permission()
+              )
+            )
+          )
         }
       };
     },
