@@ -75,9 +75,7 @@ const userFieldPair = {
   item: 'creator',
   property: 'creator',
   theme: 'creator',
-  log: 'user',
-  user: 'self',
-  group: 'self'
+  log: 'user'
 };
 
 const group = {
@@ -134,10 +132,10 @@ const group = {
             isMember: group.relation.$match(userGroup.id, targetId)
           };
         default:
-          const { targetOwner, targetOwnerGroup }: { targetOwner: User, targetOwnerGroup: Group } = await group.relation.$handler.call(null, key, targetId);
+          const target = await group.relation.$handler.call(null, key, targetId);
           return {
-            isOwner: group.relation.$match(user.id, targetOwner.id),
-            isMember: group.relation.$match(userGroup.id, targetOwnerGroup.id)
+            isOwner: group.relation.$match(user.id, target.user.id),
+            isMember: group.relation.$match(userGroup.id, target.group.id)
           };
       }
     },
