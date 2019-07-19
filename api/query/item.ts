@@ -1,12 +1,10 @@
 import { Context } from 'graphql-yoga/dist/types';
-import { prisma, Item, ItemWhereUniqueInput, ItemWhereInput, ItemOrderByInput, User } from '../model';
+import { prisma, Item, ItemWhereUniqueInput, ItemWhereInput, ItemOrderByInput } from '../model';
 import log from '../util/log';
 import auth from '../auth';
 
 const itemQuery = {
   async item(_: any, args: { where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
       const targetItem: Item = await prisma.item(args.where);
 
@@ -14,8 +12,7 @@ const itemQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_I001: Item not found.',
-          userId: viewer.id
+          result: '#ERR_I001: Item not found.'
         });
 
         return;
@@ -26,8 +23,7 @@ const itemQuery = {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: viewer.id
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`
       });
 
       throw new Error(error.message || '#ERR_FFFF');
@@ -47,16 +43,13 @@ const itemQuery = {
     },
     context: Context
   ): Promise<Item[]> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
       return await prisma.items({ ...args });
     } catch (error) {
       // Write Log
       log.error({
         ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: viewer.id
+        result: `#ERR_FFFF: Unexpected Error. ${error.message}`
       });
 
       throw new Error(error.message || '#ERR_FFFF');
