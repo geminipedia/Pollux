@@ -1,7 +1,9 @@
 import groupMutation from './group';
+import itemMutation from './item';
 
 const Mutation = {
-  ...groupMutation
+  ...groupMutation,
+  ...itemMutation
 };
 
 export default Mutation;
