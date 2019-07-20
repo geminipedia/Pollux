@@ -49,20 +49,18 @@ const newsQuery = {
     }
   },
 
-  async newses({ _, args, context }:
-    {
-      _: any;
-      args?: {
-        where?: NewsWhereInput;
-        orderBy?: NewsOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      };
-      context: Context;
-    }
+  async newses(
+    _: any,
+    args: {
+      where?: NewsWhereInput;
+      orderBy?: NewsOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context,
   ): Promise<News[]> {
     const viewer: User = await auth.token.parse(context.request);
 

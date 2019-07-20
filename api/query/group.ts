@@ -50,17 +50,17 @@ const groupQuery = {
   },
 
   async groups(
-      _: any,
-      args: {
-        where?: GroupWhereInput;
-        orderBy?: GroupOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      },
-      context: Context
+    _: any,
+    args: {
+      where?: GroupWhereInput;
+      orderBy?: GroupOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context
   ): Promise<Group[]> {
     const user: User = await auth.token.parse(context.request);
 

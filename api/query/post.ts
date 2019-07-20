@@ -49,20 +49,18 @@ const postQuery = {
     }
   },
 
-  async posts({ _, args, context }:
-    {
-      _: any;
-      args?: {
-        where?: PostWhereInput;
-        orderBy?: PostOrderByInput;
-        skip?: number;
-        after?: string;
-        before?: string;
-        first?: number;
-        last?: number;
-      };
-      context: Context;
-    }
+  async posts(
+    _: any,
+    args: {
+      where?: PostWhereInput;
+      orderBy?: PostOrderByInput;
+      skip?: number;
+      after?: string;
+      before?: string;
+      first?: number;
+      last?: number;
+    },
+    context: Context
   ): Promise<Post[]> {
     const viewer: User = await auth.token.parse(context.request);
 
