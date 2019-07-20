@@ -21,7 +21,7 @@ const token = {
   },
 
   get: (req: Request): string => {
-    if (!req.cookies.__TOKEN || !req.get('Authorization')) {
+    if (!req.cookies.__TOKEN && !req.get('Authorization')) {
       return null;
     }
     return req.cookies.__TOKEN || req.get('Authorization').split('Bearer ')[1];
