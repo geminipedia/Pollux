@@ -70,131 +70,7 @@ const group = {
   permission: {
     $expand: async (user: User, key: PermissionKeyType):
       Promise<PermissionTypePayload> => {
-      return {
-        owner: {
-          read: await group.permission.$queryDeliver.call(
-            null,
-            'read',
-            group.permission.$queryDeliver.call(
-              null,
-              'owner',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          write: await group.permission.$queryDeliver.call(
-            null,
-            'write',
-            group.permission.$queryDeliver.call(
-              null,
-              'owner',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          delete: await group.permission.$queryDeliver.call(
-            null,
-            'delete',
-            group.permission.$queryDeliver.call(
-              null,
-              'owner',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          )
-        },
-        group: {
-          read: await group.permission.$queryDeliver.call(
-            null,
-            'read',
-            group.permission.$queryDeliver.call(
-              null,
-              'group',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          write: await group.permission.$queryDeliver.call(
-            null,
-            'write',
-            group.permission.$queryDeliver.call(
-              null,
-              'group',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          delete: await group.permission.$queryDeliver.call(
-            null,
-            'delete',
-            group.permission.$queryDeliver.call(
-              null,
-              'group',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          )
-        },
-        anyone: {
-          read: await group.permission.$queryDeliver.call(
-            null,
-            'read',
-            group.permission.$queryDeliver.call(
-              null,
-              'anyone',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          write: await group.permission.$queryDeliver.call(
-            null,
-            'write',
-            group.permission.$queryDeliver.call(
-              null,
-              'anyone',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          ),
-          delete: await group.permission.$queryDeliver.call(
-            null,
-            'delete',
-            group.permission.$queryDeliver.call(
-              null,
-              'anyone',
-              group.permission.$queryDeliver.call(
-                null,
-                key,
-                prisma.user({ id: user.id }).group().permission()
-              )
-            )
-          )
-        }
-      };
+      return await group.permission.$nested(user.id, key, ['owner', 'group', 'anyone'], ['read', 'write', 'delete']);
     },
 
     $queryDeliver: (
@@ -202,6 +78,39 @@ const group = {
       callback: PermissionPromise | PermissionTypePromise | AccessPromise
     ): PermissionTypePromise | AccessPromise => {
       return callback[key]();
+    },
+
+    $nested: async (
+      id: User['id'],
+      key: PermissionKeyType,
+      permissionKeyList: PermissionTypeKeyType[],
+      accessKeyList: AccessKeyType[]
+    ): Promise<PermissionTypePayload> => {
+      const result = Object.create(null);
+
+      await permissionKeyList.forEach(async permissionKey => {
+        await accessKeyList.forEach(async accessKey => {
+          result[permissionKey] = Object.create(null);
+
+          const resultAccess: boolean = await group.permission.$queryDeliver.call(
+            null,
+            accessKey,
+            group.permission.$queryDeliver.call(
+              null,
+              permissionKey,
+              group.permission.$queryDeliver.call(
+                null,
+                key,
+                prisma.user({ id }).group().permission()
+              )
+            )
+          );
+
+          result[permissionKey][accessKey] = resultAccess;
+        });
+      });
+
+      return result;
     }
   },
 
