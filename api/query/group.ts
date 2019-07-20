@@ -10,6 +10,17 @@ const groupQuery = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.',
+          userId: user.id
+        });
+
+        return;
+      }
+
       const targetGroup: Group = await prisma.group(args.where);
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
       const relation: RelationPayload = await group.relation.$check(user, targetGroup.id, 'group');
@@ -65,6 +76,16 @@ const groupQuery = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
 
       const queriedGroups: Group[] = await prisma.groups({ ...args });

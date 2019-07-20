@@ -21,11 +21,20 @@ const token = {
   },
 
   get: (req: Request): string => {
-    return  req.cookies.__TOKEN || req.get('Authorization').split('Bearer ')[1];
+    if (!req.cookies.__TOKEN || !req.get('Authorization')) {
+      return null;
+    }
+    return req.cookies.__TOKEN || req.get('Authorization').split('Bearer ')[1];
   },
 
   parse: async (req: Request): Promise<User> => {
-    const userInfo: UserSignPayload = await auth.verify(token.get(req), req);
+    const tokenStr = token.get(req);
+
+    if (!tokenStr) {
+      return null;
+    }
+
+    const userInfo: UserSignPayload = await auth.verify(tokenStr, req);
     return await prisma.user({ id: userInfo.id });
   }
 };

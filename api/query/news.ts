@@ -11,6 +11,18 @@ const newsQuery = {
 
     try {
       const targetNews: News = await prisma.news(args.where);
+
+      if (!viewer && targetNews.published) {
+        return targetNews;
+      } else if (!viewer) {
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'news');
       const relation: RelationPayload = await group.relation.$check(viewer, targetNews.id, 'news');
 
@@ -65,6 +77,10 @@ const newsQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
+      if (!viewer) {
+        return await prisma.newses({ where: { published: true } });
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'news');
 
       const queriedNewses: News[] = await prisma.newses({ ...args });

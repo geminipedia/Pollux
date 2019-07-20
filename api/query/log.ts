@@ -10,6 +10,16 @@ const logQuery = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const targetLog: Log = await prisma.log(args.where);
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
       const relation: RelationPayload = await group.relation.$check(user, targetLog.id, 'log');
@@ -65,6 +75,16 @@ const logQuery = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
 
       const queriedLogs: Log[] = await prisma.logs({ ...args });

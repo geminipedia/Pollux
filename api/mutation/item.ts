@@ -10,6 +10,16 @@ const itemMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
 
       if (!permission.owner.write) {
@@ -59,6 +69,16 @@ const itemMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const targetItem: Item = await prisma.item(args.where);
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
       const relation: RelationPayload = await group.relation.$check(user, targetItem.id, 'item');
@@ -91,6 +111,16 @@ const itemMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const targetItem: Item = await prisma.item(args.where);
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
       const relation: RelationPayload = await group.relation.$check(user, targetItem.id, 'item');

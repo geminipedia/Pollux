@@ -11,6 +11,18 @@ const postQuery = {
 
     try {
       const targetPost: Post = await prisma.post(args.where);
+
+      if (!viewer && targetPost.published) {
+        return targetPost;
+      } else if (!viewer) {
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'post');
       const relation: RelationPayload = await group.relation.$check(viewer, targetPost.id, 'post');
 
@@ -65,6 +77,10 @@ const postQuery = {
     const viewer: User = await auth.token.parse(context.request);
 
     try {
+      if (!viewer) {
+        return await prisma.posts({ where: { published: true } });
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'post');
 
       const queriedPosts: Post[] = await prisma.posts({ ...args });

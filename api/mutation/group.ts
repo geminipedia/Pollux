@@ -8,6 +8,16 @@ const groupMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      if (!user) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_F000: Permission Deny.'
+        });
+
+        return;
+      }
+
       const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().anyone().write();
 
       if (!accessable) {
