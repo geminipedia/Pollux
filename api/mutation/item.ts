@@ -81,6 +81,18 @@ const itemMutation = {
       }
 
       const targetItem: Item = await prisma.item(args.where);
+
+      if (!targetItem) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_I001: Item not found.',
+          userId: user.id
+        });
+
+        throw new Error('#ERR_I001: Item not found.');
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
       const relation: RelationPayload = await group.relation.$check(user, targetItem.id, 'item');
 
