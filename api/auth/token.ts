@@ -14,14 +14,14 @@ const token = {
       {
         domain: `.${process.env.SITE_DOMAIN}`,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        httpOnly: false,
+        httpOnly: true,
         secure: true
       }
     );
   },
 
   get: (req: Request): string => {
-    return req.get('Authorization').split('Bearer ')[1];
+    return  req.cookies.__TOKEN || req.get('Authorization').split('Bearer ')[1];
   },
 
   parse: async (req: Request): Promise<User> => {
