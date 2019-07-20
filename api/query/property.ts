@@ -11,11 +11,12 @@ const propertyQuery = {
       return await prisma.property(args.where);
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
-        userId: viewer.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
@@ -40,11 +41,12 @@ const propertyQuery = {
       return await prisma.properties({ ...args });
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: viewer.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }

@@ -20,7 +20,7 @@ const newsQuery = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'news');
@@ -34,7 +34,7 @@ const newsQuery = {
           userId: viewer.id
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!targetNews) {
@@ -45,17 +45,18 @@ const newsQuery = {
           userId: viewer.id
         });
 
-        return;
+        throw new Error('#ERR_N001: News not found.');
       }
 
       return targetNews;
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: viewer.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
@@ -106,11 +107,12 @@ const newsQuery = {
       return result;
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `Unexpected Error. ${error.message}`,
-        userId: viewer.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }

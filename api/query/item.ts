@@ -14,16 +14,18 @@ const itemQuery = {
           result: '#ERR_I001: Item not found.'
         });
 
-        return;
+        throw new Error('#ERR_I001: Item not found.');
       }
 
       return targetItem;
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
@@ -46,10 +48,12 @@ const itemQuery = {
       return await prisma.items({ ...args });
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }

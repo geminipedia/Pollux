@@ -15,7 +15,7 @@ const groupMutation = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().anyone().write();
@@ -28,7 +28,7 @@ const groupMutation = {
           userId: user.id
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const groupExist: Group = await prisma.group({ name: args.data.name });
@@ -37,11 +37,11 @@ const groupMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: `Group ${groupExist.name} already existed.`,
+          result: `#ERR_G000 Group ${groupExist.name} already existed.`,
           userId: user.id
         });
 
-        throw new Error('#ERR_G000');
+        throw new Error(`#ERR_G000 Group ${groupExist.name} already existed.`);
       }
       // Write Log
       await log.write({
@@ -51,8 +51,16 @@ const groupMutation = {
       });
 
       return prisma.createGroup(args.data);
-    } catch (err) {
-      throw new Error(err.message || '#ERR_FFFF');
+    } catch (error) {
+      // Write Log
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
+
+      throw new Error(error.message || '#ERR_FFFF');
     }
   }
 };

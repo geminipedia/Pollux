@@ -17,7 +17,7 @@ const logQuery = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetLog: Log = await prisma.log(args.where);
@@ -32,7 +32,7 @@ const logQuery = {
           userId: user.id
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!targetLog) {
@@ -43,17 +43,18 @@ const logQuery = {
           userId: user.id
         });
 
-        return;
+        throw new Error('#ERR_L001: Log not found.');
       }
 
       return targetLog;
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: user.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
@@ -82,7 +83,7 @@ const logQuery = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
@@ -106,11 +107,12 @@ const logQuery = {
       return result;
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: user.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }

@@ -17,7 +17,7 @@ const itemMutation = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
@@ -30,7 +30,7 @@ const itemMutation = {
           userId: user.id
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const itemExist: Item = await prisma.item({ itemId: args.data.itemId });
@@ -39,11 +39,11 @@ const itemMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: `Item ${itemExist.name} already existed.`,
+          result: `#ERR_I000 Item ${itemExist.name} already existed.`,
           userId: user.id
         });
 
-        throw new Error('#ERR_G000');
+        throw new Error(`#ERR_I000 Item ${itemExist.name} already existed.`);
       }
       // Write Log
       await log.write({
@@ -55,11 +55,12 @@ const itemMutation = {
       return prisma.createItem(args.data);
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: user.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
@@ -76,7 +77,7 @@ const itemMutation = {
           result: '#ERR_F000: Permission Deny.'
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetItem: Item = await prisma.item(args.where);
@@ -91,7 +92,7 @@ const itemMutation = {
           userId: user.id
         });
 
-        return;
+        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
@@ -102,8 +103,16 @@ const itemMutation = {
       });
 
       return prisma.updateItem({ ...args });
-    } catch (err) {
-      throw new Error(err.message || '#ERR_FFFF');
+    } catch (error) {
+      // Write Log
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
+
+      throw new Error(error.message || '#ERR_FFFF');
     }
   },
 
@@ -146,11 +155,12 @@ const itemMutation = {
       return prisma.deleteItem(args.where);
     } catch (error) {
       // Write Log
-      log.error({
-        ip: context.request.ip,
-        result: `#ERR_FFFF: Unexpected Error. ${error.message}`,
-        userId: user.id
-      });
+      if (!/#ERR_/.test(error.message)) {
+        log.error({
+          ip: context.request.ip,
+          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+        });
+      }
 
       throw new Error(error.message || '#ERR_FFFF');
     }
