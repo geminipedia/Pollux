@@ -1,7 +1,6 @@
 import { Context } from 'graphql-yoga/dist/types';
 import { prisma, Item, ItemWhereUniqueInput, ItemWhereInput, ItemOrderByInput } from '../model';
 import log from '../util/log';
-import auth from '../auth';
 
 const itemQuery = {
   async item(_: any, args: { where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
