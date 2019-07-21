@@ -71,6 +71,7 @@ const group = {
     $expand: async (user: User, key: PermissionKeyType):
       Promise<PermissionTypePayload> => {
       const result = await group.permission.$nested(user.id, key, ['owner', 'group', 'anyone'], ['read', 'write', 'delete']);
+      await prisma.groups(); // Fix prisma callback null temporary
       return result;
     },
 
