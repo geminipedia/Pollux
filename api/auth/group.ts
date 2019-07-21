@@ -70,7 +70,8 @@ const group = {
   permission: {
     $expand: async (user: User, key: PermissionKeyType):
       Promise<PermissionTypePayload> => {
-      return await group.permission.$nested(user.id, key, ['owner', 'group', 'anyone'], ['read', 'write', 'delete']);
+      const result = await group.permission.$nested(user.id, key, ['owner', 'group', 'anyone'], ['read', 'write', 'delete']);
+      return result;
     },
 
     $queryDeliver: (

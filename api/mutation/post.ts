@@ -10,9 +10,11 @@ const postMutation = {
     const author: User = await auth.token.parse(context.request);
 
     try {
+      const permission: PermissionTypePayload = await group.permission.$expand(author, 'post');
+
       if (!author) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.'
         });
@@ -20,11 +22,9 @@ const postMutation = {
         throw new Error('#ERR_F000: Permission Deny.');
       }
 
-      const permission: PermissionTypePayload = await group.permission.$expand(author, 'post');
-
       if (!permission.owner.write) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.',
           userId: author.id
@@ -44,7 +44,7 @@ const postMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        await log.error({
           ip: context.request.ip,
           result: `#ERR_FFFF Unexpected Error. ${error.message}`
         });
@@ -60,7 +60,7 @@ const postMutation = {
     try {
       if (!author) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.'
         });
@@ -72,7 +72,7 @@ const postMutation = {
 
       if (!targetPost) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_P001: Post not found.',
           userId: author.id
@@ -86,7 +86,7 @@ const postMutation = {
 
       if (!(permission.anyone.write || (permission.group.write && relation.isMember) || (permission.owner.write && relation.isOwner))) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.',
           userId: author.id

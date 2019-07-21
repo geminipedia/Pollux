@@ -10,9 +10,11 @@ const itemMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
+
       if (!user) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.'
         });
@@ -20,11 +22,9 @@ const itemMutation = {
         throw new Error('#ERR_F000: Permission Deny.');
       }
 
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
-
       if (!permission.owner.write) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.',
           userId: user.id

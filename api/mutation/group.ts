@@ -9,9 +9,11 @@ const groupMutation = {
     const user: User = await auth.token.parse(context.request);
 
     try {
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
+
       if (!user) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.'
         });
@@ -19,11 +21,9 @@ const groupMutation = {
         throw new Error('#ERR_F000: Permission Deny.');
       }
 
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
-
       if (!permission.anyone.write) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.',
           userId: user.id
@@ -55,7 +55,7 @@ const groupMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        await log.error({
           ip: context.request.ip,
           result: `#ERR_FFFF Unexpected Error. ${error.message}`
         });

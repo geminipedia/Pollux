@@ -10,9 +10,11 @@ const newsMutation = {
     const author: User = await auth.token.parse(context.request);
 
     try {
+      const permission: PermissionTypePayload = await group.permission.$expand(author, 'news');
+
       if (!author) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.'
         });
@@ -20,11 +22,9 @@ const newsMutation = {
         throw new Error('#ERR_F000: Permission Deny.');
       }
 
-      const permission: PermissionTypePayload = await group.permission.$expand(author, 'news');
-
       if (!permission.owner.write) {
         // Write Log
-        log.warn({
+        await log.warn({
           ip: context.request.ip,
           result: '#ERR_F000: Permission Deny.',
           userId: author.id
@@ -44,7 +44,7 @@ const newsMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        await log.error({
           ip: context.request.ip,
           result: `#ERR_FFFF Unexpected Error. ${error.message}`
         });
