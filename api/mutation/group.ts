@@ -2,6 +2,7 @@ import { Context } from 'graphql-yoga/dist/types';
 import { prisma, Group, GroupCreateInput, User } from '../model';
 import log from '../util/log';
 import auth from '../auth';
+import group, { PermissionTypePayload } from '../auth/group';
 
 const groupMutation = {
   async createGroup(_, args: { data: GroupCreateInput }, context: Context): Promise<Group> {
@@ -18,9 +19,9 @@ const groupMutation = {
         throw new Error('#ERR_F000: Permission Deny.');
       }
 
-      const accessable: boolean = await prisma.user({ id: user.id }).group().permission().group().anyone().write();
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
 
-      if (!accessable) {
+      if (!permission.anyone.write) {
         // Write Log
         log.warn({
           ip: context.request.ip,
