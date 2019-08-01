@@ -1,9 +1,28 @@
+enum ThemeType {
+  OVERVIEW,
+  THEME,
+  LIST,
+  GROUP,
+  SINGLE
+}
+
+enum ThemeTarget {
+  ITEM,
+  NEWS,
+  POST,
+  USER,
+  HOME,
+  GENERAL
+}
+
 type Theme {
   id: UUID! @unique @id
 # ---
   name: String!
   description: String
   component: String
+  type: ThemeType
+  target: ThemeTarget
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 # ---
