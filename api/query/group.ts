@@ -22,6 +22,18 @@ const groupQuery = {
       }
 
       const targetGroup: Group = await prisma.group(args.where);
+
+      if (!targetGroup) {
+        // Write Log
+        log.warn({
+          ip: context.request.ip,
+          result: '#ERR_G001: Group not found.',
+          userId: user.id
+        });
+
+        throw new Error('#ERR_G001: Group not found.');
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
       const relation: RelationPayload = await group.relation.$check(user, targetGroup.id, 'group');
 
@@ -34,17 +46,6 @@ const groupQuery = {
         });
 
         throw new Error('#ERR_F000: Permission Deny.');
-      }
-
-      if (!targetGroup) {
-        // Write Log
-        log.warn({
-          ip: context.request.ip,
-          result: '#ERR_G001: Group not found.',
-          userId: user.id
-        });
-
-        throw new Error('#ERR_G001: Group not found.');
       }
 
       return targetGroup;

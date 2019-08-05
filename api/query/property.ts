@@ -5,8 +5,6 @@ import auth from '../auth';
 
 const propertyQuery = {
   async property(_: any, args: { where: PropertyWhereUniqueInput }, context: Context): Promise<Property> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
       return await prisma.property(args.where);
     } catch (error) {
@@ -35,8 +33,6 @@ const propertyQuery = {
     },
     context: Context
   ): Promise<Property[]> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
       return await prisma.properties({ ...args });
     } catch (error) {
