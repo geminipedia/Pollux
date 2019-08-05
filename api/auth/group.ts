@@ -42,7 +42,11 @@ type PermissionKeyType =
   'group' |
   'layout' |
   'log' |
-  'analytics'
+  'analytics' |
+  'site' |
+  'admin' |
+  'theme' |
+  'page'
   ;
 
 export interface PermissionTypePayload {

@@ -31,6 +31,10 @@ type Permission {
   layout: PermissionType! @relation(link: INLINE, name: "LayoutPermission")
   log: PermissionType! @relation(link: INLINE, name: "LogPermission")
   analytics: PermissionType! @relation(link: INLINE, name: "AnalyticsPermission")
+  site: PermissionType! @relation(link: INLINE, name: "SitePermission")
+  admin: PermissionType! @relation(link: INLINE, name: "AdminPermission")
+  theme: PermissionType! @relation(link: INLINE, name: "ThemePermission")
+  page: PermissionType! @relation(link: INLINE, name: "PagePermission")
 # ---
   meta: Json
 }
