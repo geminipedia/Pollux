@@ -9,6 +9,7 @@ type Admin implements Site {
 # ---
   menu: [Page!]!
   access: [Group!]
+  creator: User! @relation(link: INLINE, name: "AdminCreator")
 # ---
   meta: Json
 }

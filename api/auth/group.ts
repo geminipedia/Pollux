@@ -66,8 +66,11 @@ const userFieldPair = {
   reply: 'user',
   item: 'creator',
   property: 'creator',
+  log: 'user',
   theme: 'creator',
-  log: 'user'
+  site: 'creator',
+  admin: 'creator',
+  page: 'creator'
 };
 
 const group = {
