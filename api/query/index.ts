@@ -6,6 +6,7 @@ import groupQuery from './group';
 import logQuery from './log';
 import adminQuery from './admin';
 import siteQuery from './site';
+import pageQuery from './page';
 
 const Query = {
   ...itemQuery,
@@ -15,7 +16,8 @@ const Query = {
   ...groupQuery,
   ...logQuery,
   ...adminQuery,
-  ...siteQuery
+  ...siteQuery,
+  ...pageQuery
 };
 
 export default Query;
