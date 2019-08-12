@@ -4,6 +4,8 @@ import postQuery from './post';
 import newsQuery from './news';
 import groupQuery from './group';
 import logQuery from './log';
+import adminQuery from './admin';
+import siteQuery from './site';
 
 const Query = {
   ...itemQuery,
@@ -11,7 +13,9 @@ const Query = {
   ...postQuery,
   ...newsQuery,
   ...groupQuery,
-  ...logQuery
+  ...logQuery,
+  ...adminQuery,
+  ...siteQuery
 };
 
 export default Query;
