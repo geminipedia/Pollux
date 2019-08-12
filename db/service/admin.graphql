@@ -8,7 +8,6 @@ type Admin implements Site {
   updatedAt: DateTime! @updatedAt
 # ---
   menu: [Page!]!
-  access: [Group!]
   creator: User! @relation(link: INLINE, name: "AdminCreator")
 # ---
   meta: Json
