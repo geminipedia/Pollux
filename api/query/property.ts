@@ -1,7 +1,6 @@
 import { Context } from 'graphql-yoga/dist/types';
-import { prisma, Property, PropertyWhereUniqueInput, PropertyWhereInput, PropertyOrderByInput, User } from '../model';
+import { prisma, Property, PropertyWhereUniqueInput, PropertyWhereInput, PropertyOrderByInput } from '../model';
 import log from '../util/log';
-import auth from '../auth';
 
 const propertyQuery = {
   async property(_: any, args: { where: PropertyWhereUniqueInput }, context: Context): Promise<Property> {

@@ -1,5 +1,5 @@
 import { prisma, Log, Event, User, EventType } from '../../model';
-import fetchMsg, { FetchMessagePayload } from './fetchMsg';
+import fetchMsg from './fetchMsg';
 
 interface LogPayload {
   ip: Log['ip'];

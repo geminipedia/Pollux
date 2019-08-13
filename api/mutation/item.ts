@@ -27,8 +27,6 @@ const itemMutation = {
           code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const itemExist: Item = await prisma.item({ itemId: args.data.itemId });
@@ -131,8 +129,6 @@ const itemMutation = {
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
-
-        return;
       }
 
       const targetItem: Item = await prisma.item(args.where);
