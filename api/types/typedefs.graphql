@@ -2799,30 +2799,30 @@ input MeasurementWhereUniqueInput {
 }
 
 type Mutation {
-  createAccess(data: AccessCreateInput!): Access!
-  updateAccess(data: AccessUpdateInput!, where: AccessWhereUniqueInput!): Access
-  updateManyAccesses(data: AccessUpdateManyMutationInput!, where: AccessWhereInput): BatchPayload!
-  upsertAccess(where: AccessWhereUniqueInput!, create: AccessCreateInput!, update: AccessUpdateInput!): Access!
-  deleteAccess(where: AccessWhereUniqueInput!): Access
-  deleteManyAccesses(where: AccessWhereInput): BatchPayload!
+  # createAccess(data: AccessCreateInput!): Access!
+  # updateAccess(data: AccessUpdateInput!, where: AccessWhereUniqueInput!): Access
+  # updateManyAccesses(data: AccessUpdateManyMutationInput!, where: AccessWhereInput): BatchPayload!
+  # upsertAccess(where: AccessWhereUniqueInput!, create: AccessCreateInput!, update: AccessUpdateInput!): Access!
+  # deleteAccess(where: AccessWhereUniqueInput!): Access
+  # deleteManyAccesses(where: AccessWhereInput): BatchPayload!
   createAdmin(data: AdminCreateInput!): Admin!
   updateAdmin(data: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin
   updateManyAdmins(data: AdminUpdateManyMutationInput!, where: AdminWhereInput): BatchPayload!
   upsertAdmin(where: AdminWhereUniqueInput!, create: AdminCreateInput!, update: AdminUpdateInput!): Admin!
   deleteAdmin(where: AdminWhereUniqueInput!): Admin
   deleteManyAdmins(where: AdminWhereInput): BatchPayload!
-  createEntity(data: EntityCreateInput!): Entity!
-  updateEntity(data: EntityUpdateInput!, where: EntityWhereUniqueInput!): Entity
-  updateManyEntities(data: EntityUpdateManyMutationInput!, where: EntityWhereInput): BatchPayload!
-  upsertEntity(where: EntityWhereUniqueInput!, create: EntityCreateInput!, update: EntityUpdateInput!): Entity!
-  deleteEntity(where: EntityWhereUniqueInput!): Entity
-  deleteManyEntities(where: EntityWhereInput): BatchPayload!
-  createEvent(data: EventCreateInput!): Event!
-  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
-  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteManyEvents(where: EventWhereInput): BatchPayload!
+  # createEntity(data: EntityCreateInput!): Entity!
+  # updateEntity(data: EntityUpdateInput!, where: EntityWhereUniqueInput!): Entity
+  # updateManyEntities(data: EntityUpdateManyMutationInput!, where: EntityWhereInput): BatchPayload!
+  # upsertEntity(where: EntityWhereUniqueInput!, create: EntityCreateInput!, update: EntityUpdateInput!): Entity!
+  # deleteEntity(where: EntityWhereUniqueInput!): Entity
+  # deleteManyEntities(where: EntityWhereInput): BatchPayload!
+  # createEvent(data: EventCreateInput!): Event!
+  # updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  # updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  # upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  # deleteEvent(where: EventWhereUniqueInput!): Event
+  # deleteManyEvents(where: EventWhereInput): BatchPayload!
   createFile(data: FileCreateInput!): File!
   updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
   updateManyFiles(data: FileUpdateManyMutationInput!, where: FileWhereInput): BatchPayload!
@@ -2847,30 +2847,30 @@ type Mutation {
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteManyItems(where: ItemWhereInput): BatchPayload!
-  createLang(data: LangCreateInput!): Lang!
-  updateLang(data: LangUpdateInput!, where: LangWhereUniqueInput!): Lang
-  updateManyLangs(data: LangUpdateManyMutationInput!, where: LangWhereInput): BatchPayload!
-  upsertLang(where: LangWhereUniqueInput!, create: LangCreateInput!, update: LangUpdateInput!): Lang!
-  deleteLang(where: LangWhereUniqueInput!): Lang
-  deleteManyLangs(where: LangWhereInput): BatchPayload!
-  createLog(data: LogCreateInput!): Log!
-  updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
-  updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
-  upsertLog(where: LogWhereUniqueInput!, create: LogCreateInput!, update: LogUpdateInput!): Log!
+  # createLang(data: LangCreateInput!): Lang!
+  # updateLang(data: LangUpdateInput!, where: LangWhereUniqueInput!): Lang
+  # updateManyLangs(data: LangUpdateManyMutationInput!, where: LangWhereInput): BatchPayload!
+  # upsertLang(where: LangWhereUniqueInput!, create: LangCreateInput!, update: LangUpdateInput!): Lang!
+  # deleteLang(where: LangWhereUniqueInput!): Lang
+  # deleteManyLangs(where: LangWhereInput): BatchPayload!
+  # createLog(data: LogCreateInput!): Log!
+  # updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
+  # updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
+  # upsertLog(where: LogWhereUniqueInput!, create: LogCreateInput!, update: LogUpdateInput!): Log!
   deleteLog(where: LogWhereUniqueInput!): Log
   deleteManyLogs(where: LogWhereInput): BatchPayload!
-  createMarkup(data: MarkupCreateInput!): Markup!
-  updateMarkup(data: MarkupUpdateInput!, where: MarkupWhereUniqueInput!): Markup
-  updateManyMarkups(data: MarkupUpdateManyMutationInput!, where: MarkupWhereInput): BatchPayload!
-  upsertMarkup(where: MarkupWhereUniqueInput!, create: MarkupCreateInput!, update: MarkupUpdateInput!): Markup!
-  deleteMarkup(where: MarkupWhereUniqueInput!): Markup
-  deleteManyMarkups(where: MarkupWhereInput): BatchPayload!
-  createMeasurement(data: MeasurementCreateInput!): Measurement!
-  updateMeasurement(data: MeasurementUpdateInput!, where: MeasurementWhereUniqueInput!): Measurement
-  updateManyMeasurements(data: MeasurementUpdateManyMutationInput!, where: MeasurementWhereInput): BatchPayload!
-  upsertMeasurement(where: MeasurementWhereUniqueInput!, create: MeasurementCreateInput!, update: MeasurementUpdateInput!): Measurement!
-  deleteMeasurement(where: MeasurementWhereUniqueInput!): Measurement
-  deleteManyMeasurements(where: MeasurementWhereInput): BatchPayload!
+  # createMarkup(data: MarkupCreateInput!): Markup!
+  # updateMarkup(data: MarkupUpdateInput!, where: MarkupWhereUniqueInput!): Markup
+  # updateManyMarkups(data: MarkupUpdateManyMutationInput!, where: MarkupWhereInput): BatchPayload!
+  # upsertMarkup(where: MarkupWhereUniqueInput!, create: MarkupCreateInput!, update: MarkupUpdateInput!): Markup!
+  # deleteMarkup(where: MarkupWhereUniqueInput!): Markup
+  # deleteManyMarkups(where: MarkupWhereInput): BatchPayload!
+  # createMeasurement(data: MeasurementCreateInput!): Measurement!
+  # updateMeasurement(data: MeasurementUpdateInput!, where: MeasurementWhereUniqueInput!): Measurement
+  # updateManyMeasurements(data: MeasurementUpdateManyMutationInput!, where: MeasurementWhereInput): BatchPayload!
+  # upsertMeasurement(where: MeasurementWhereUniqueInput!, create: MeasurementCreateInput!, update: MeasurementUpdateInput!): Measurement!
+  # deleteMeasurement(where: MeasurementWhereUniqueInput!): Measurement
+  # deleteManyMeasurements(where: MeasurementWhereInput): BatchPayload!
   createNews(data: NewsCreateInput!): News!
   updateNews(data: NewsUpdateInput!, where: NewsWhereUniqueInput!): News
   updateManyNewses(data: NewsUpdateManyMutationInput!, where: NewsWhereInput): BatchPayload!
@@ -2889,35 +2889,35 @@ type Mutation {
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
   deletePage(where: PageWhereUniqueInput!): Page
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  createPageHead(data: PageHeadCreateInput!): PageHead!
-  updatePageHead(data: PageHeadUpdateInput!, where: PageHeadWhereUniqueInput!): PageHead
-  updateManyPageHeads(data: PageHeadUpdateManyMutationInput!, where: PageHeadWhereInput): BatchPayload!
-  upsertPageHead(where: PageHeadWhereUniqueInput!, create: PageHeadCreateInput!, update: PageHeadUpdateInput!): PageHead!
-  deletePageHead(where: PageHeadWhereUniqueInput!): PageHead
-  deleteManyPageHeads(where: PageHeadWhereInput): BatchPayload!
-  createPageMeta(data: PageMetaCreateInput!): PageMeta!
-  updatePageMeta(data: PageMetaUpdateInput!, where: PageMetaWhereUniqueInput!): PageMeta
-  updateManyPageMetas(data: PageMetaUpdateManyMutationInput!, where: PageMetaWhereInput): BatchPayload!
-  upsertPageMeta(where: PageMetaWhereUniqueInput!, create: PageMetaCreateInput!, update: PageMetaUpdateInput!): PageMeta!
-  deletePageMeta(where: PageMetaWhereUniqueInput!): PageMeta
-  deleteManyPageMetas(where: PageMetaWhereInput): BatchPayload!
-  createParagraph(data: ParagraphCreateInput!): Paragraph!
-  updateParagraph(data: ParagraphUpdateInput!, where: ParagraphWhereUniqueInput!): Paragraph
-  updateManyParagraphs(data: ParagraphUpdateManyMutationInput!, where: ParagraphWhereInput): BatchPayload!
-  upsertParagraph(where: ParagraphWhereUniqueInput!, create: ParagraphCreateInput!, update: ParagraphUpdateInput!): Paragraph!
-  deleteParagraph(where: ParagraphWhereUniqueInput!): Paragraph
-  deleteManyParagraphs(where: ParagraphWhereInput): BatchPayload!
+  # createPageHead(data: PageHeadCreateInput!): PageHead!
+  # updatePageHead(data: PageHeadUpdateInput!, where: PageHeadWhereUniqueInput!): PageHead
+  # updateManyPageHeads(data: PageHeadUpdateManyMutationInput!, where: PageHeadWhereInput): BatchPayload!
+  # upsertPageHead(where: PageHeadWhereUniqueInput!, create: PageHeadCreateInput!, update: PageHeadUpdateInput!): PageHead!
+  # deletePageHead(where: PageHeadWhereUniqueInput!): PageHead
+  # deleteManyPageHeads(where: PageHeadWhereInput): BatchPayload!
+  # createPageMeta(data: PageMetaCreateInput!): PageMeta!
+  # updatePageMeta(data: PageMetaUpdateInput!, where: PageMetaWhereUniqueInput!): PageMeta
+  # updateManyPageMetas(data: PageMetaUpdateManyMutationInput!, where: PageMetaWhereInput): BatchPayload!
+  # upsertPageMeta(where: PageMetaWhereUniqueInput!, create: PageMetaCreateInput!, update: PageMetaUpdateInput!): PageMeta!
+  # deletePageMeta(where: PageMetaWhereUniqueInput!): PageMeta
+  # deleteManyPageMetas(where: PageMetaWhereInput): BatchPayload!
+  # createParagraph(data: ParagraphCreateInput!): Paragraph!
+  # updateParagraph(data: ParagraphUpdateInput!, where: ParagraphWhereUniqueInput!): Paragraph
+  # updateManyParagraphs(data: ParagraphUpdateManyMutationInput!, where: ParagraphWhereInput): BatchPayload!
+  # upsertParagraph(where: ParagraphWhereUniqueInput!, create: ParagraphCreateInput!, update: ParagraphUpdateInput!): Paragraph!
+  # deleteParagraph(where: ParagraphWhereUniqueInput!): Paragraph
+  # deleteManyParagraphs(where: ParagraphWhereInput): BatchPayload!
   createPermission(data: PermissionCreateInput!): Permission!
   updatePermission(data: PermissionUpdateInput!, where: PermissionWhereUniqueInput!): Permission
   updateManyPermissions(data: PermissionUpdateManyMutationInput!, where: PermissionWhereInput): BatchPayload!
   upsertPermission(where: PermissionWhereUniqueInput!, create: PermissionCreateInput!, update: PermissionUpdateInput!): Permission!
   deletePermission(where: PermissionWhereUniqueInput!): Permission
   deleteManyPermissions(where: PermissionWhereInput): BatchPayload!
-  createPermissionType(data: PermissionTypeCreateInput!): PermissionType!
-  updatePermissionType(data: PermissionTypeUpdateInput!, where: PermissionTypeWhereUniqueInput!): PermissionType
-  upsertPermissionType(where: PermissionTypeWhereUniqueInput!, create: PermissionTypeCreateInput!, update: PermissionTypeUpdateInput!): PermissionType!
-  deletePermissionType(where: PermissionTypeWhereUniqueInput!): PermissionType
-  deleteManyPermissionTypes(where: PermissionTypeWhereInput): BatchPayload!
+  # createPermissionType(data: PermissionTypeCreateInput!): PermissionType!
+  # updatePermissionType(data: PermissionTypeUpdateInput!, where: PermissionTypeWhereUniqueInput!): PermissionType
+  # upsertPermissionType(where: PermissionTypeWhereUniqueInput!, create: PermissionTypeCreateInput!, update: PermissionTypeUpdateInput!): PermissionType!
+  # deletePermissionType(where: PermissionTypeWhereUniqueInput!): PermissionType
+  # deleteManyPermissionTypes(where: PermissionTypeWhereInput): BatchPayload!
   createPost(data: PostCreateInput!): Post!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
@@ -2948,12 +2948,12 @@ type Mutation {
   upsertSite(where: SiteWhereUniqueInput!, create: SiteCreateInput!, update: SiteUpdateInput!): Site!
   deleteSite(where: SiteWhereUniqueInput!): Site
   deleteManySites(where: SiteWhereInput): BatchPayload!
-  createStatement(data: StatementCreateInput!): Statement!
-  updateStatement(data: StatementUpdateInput!, where: StatementWhereUniqueInput!): Statement
-  updateManyStatements(data: StatementUpdateManyMutationInput!, where: StatementWhereInput): BatchPayload!
-  upsertStatement(where: StatementWhereUniqueInput!, create: StatementCreateInput!, update: StatementUpdateInput!): Statement!
-  deleteStatement(where: StatementWhereUniqueInput!): Statement
-  deleteManyStatements(where: StatementWhereInput): BatchPayload!
+  # createStatement(data: StatementCreateInput!): Statement!
+  # updateStatement(data: StatementUpdateInput!, where: StatementWhereUniqueInput!): Statement
+  # updateManyStatements(data: StatementUpdateManyMutationInput!, where: StatementWhereInput): BatchPayload!
+  # upsertStatement(where: StatementWhereUniqueInput!, create: StatementCreateInput!, update: StatementUpdateInput!): Statement!
+  # deleteStatement(where: StatementWhereUniqueInput!): Statement
+  # deleteManyStatements(where: StatementWhereInput): BatchPayload!
   createTag(data: TagCreateInput!): Tag!
   updateTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
   updateManyTags(data: TagUpdateManyMutationInput!, where: TagWhereInput): BatchPayload!
@@ -2972,12 +2972,12 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  createi18n(data: i18nCreateInput!): i18n!
-  updatei18n(data: i18nUpdateInput!, where: i18nWhereUniqueInput!): i18n
-  updateManyi18ns(data: i18nUpdateManyMutationInput!, where: i18nWhereInput): BatchPayload!
-  upserti18n(where: i18nWhereUniqueInput!, create: i18nCreateInput!, update: i18nUpdateInput!): i18n!
-  deletei18n(where: i18nWhereUniqueInput!): i18n
-  deleteManyi18ns(where: i18nWhereInput): BatchPayload!
+  # createi18n(data: i18nCreateInput!): i18n!
+  # updatei18n(data: i18nUpdateInput!, where: i18nWhereUniqueInput!): i18n
+  # updateManyi18ns(data: i18nUpdateManyMutationInput!, where: i18nWhereInput): BatchPayload!
+  # upserti18n(where: i18nWhereUniqueInput!, create: i18nCreateInput!, update: i18nUpdateInput!): i18n!
+  # deletei18n(where: i18nWhereUniqueInput!): i18n
+  # deleteManyi18ns(where: i18nWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -5166,18 +5166,18 @@ input PropertyWhereUniqueInput {
 }
 
 type Query {
-  access(where: AccessWhereUniqueInput!): Access
-  accesses(where: AccessWhereInput, orderBy: AccessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Access]!
-  accessesConnection(where: AccessWhereInput, orderBy: AccessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccessConnection!
+  # access(where: AccessWhereUniqueInput!): Access
+  # accesses(where: AccessWhereInput, orderBy: AccessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Access]!
+  # accessesConnection(where: AccessWhereInput, orderBy: AccessOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccessConnection!
   admin(where: AdminWhereUniqueInput!): Admin
   admins(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Admin]!
   adminsConnection(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdminConnection!
-  entity(where: EntityWhereUniqueInput!): Entity
-  entities(where: EntityWhereInput, orderBy: EntityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entity]!
-  entitiesConnection(where: EntityWhereInput, orderBy: EntityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EntityConnection!
-  event(where: EventWhereUniqueInput!): Event
-  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
-  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
+  # entity(where: EntityWhereUniqueInput!): Entity
+  # entities(where: EntityWhereInput, orderBy: EntityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Entity]!
+  # entitiesConnection(where: EntityWhereInput, orderBy: EntityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EntityConnection!
+  # event(where: EventWhereUniqueInput!): Event
+  # events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  # eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   file(where: FileWhereUniqueInput!): File
   files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
   filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
@@ -5196,54 +5196,54 @@ type Query {
   log(where: LogWhereUniqueInput!): Log
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log]!
   logsConnection(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LogConnection!
-  markup(where: MarkupWhereUniqueInput!): Markup
-  markups(where: MarkupWhereInput, orderBy: MarkupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Markup]!
-  markupsConnection(where: MarkupWhereInput, orderBy: MarkupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarkupConnection!
-  measurement(where: MeasurementWhereUniqueInput!): Measurement
-  measurements(where: MeasurementWhereInput, orderBy: MeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Measurement]!
-  measurementsConnection(where: MeasurementWhereInput, orderBy: MeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MeasurementConnection!
+  # markup(where: MarkupWhereUniqueInput!): Markup
+  # markups(where: MarkupWhereInput, orderBy: MarkupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Markup]!
+  # markupsConnection(where: MarkupWhereInput, orderBy: MarkupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarkupConnection!
+  # measurement(where: MeasurementWhereUniqueInput!): Measurement
+  # measurements(where: MeasurementWhereInput, orderBy: MeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Measurement]!
+  # measurementsConnection(where: MeasurementWhereInput, orderBy: MeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MeasurementConnection!
   news(where: NewsWhereUniqueInput!): News
   newses(where: NewsWhereInput, orderBy: NewsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [News]!
   newsesConnection(where: NewsWhereInput, orderBy: NewsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NewsConnection!
-  note(where: NoteWhereUniqueInput!): Note
-  notes(where: NoteWhereInput, orderBy: NoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Note]!
-  notesConnection(where: NoteWhereInput, orderBy: NoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NoteConnection!
+  # note(where: NoteWhereUniqueInput!): Note
+  # notes(where: NoteWhereInput, orderBy: NoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Note]!
+  # notesConnection(where: NoteWhereInput, orderBy: NoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NoteConnection!
   page(where: PageWhereUniqueInput!): Page
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  pageHead(where: PageHeadWhereUniqueInput!): PageHead
-  pageHeads(where: PageHeadWhereInput, orderBy: PageHeadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PageHead]!
-  pageHeadsConnection(where: PageHeadWhereInput, orderBy: PageHeadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageHeadConnection!
-  pageMeta(where: PageMetaWhereUniqueInput!): PageMeta
-  pageMetas(where: PageMetaWhereInput, orderBy: PageMetaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PageMeta]!
-  pageMetasConnection(where: PageMetaWhereInput, orderBy: PageMetaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageMetaConnection!
-  paragraph(where: ParagraphWhereUniqueInput!): Paragraph
-  paragraphs(where: ParagraphWhereInput, orderBy: ParagraphOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Paragraph]!
-  paragraphsConnection(where: ParagraphWhereInput, orderBy: ParagraphOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ParagraphConnection!
+  # pageHead(where: PageHeadWhereUniqueInput!): PageHead
+  # pageHeads(where: PageHeadWhereInput, orderBy: PageHeadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PageHead]!
+  # pageHeadsConnection(where: PageHeadWhereInput, orderBy: PageHeadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageHeadConnection!
+  # pageMeta(where: PageMetaWhereUniqueInput!): PageMeta
+  # pageMetas(where: PageMetaWhereInput, orderBy: PageMetaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PageMeta]!
+  # pageMetasConnection(where: PageMetaWhereInput, orderBy: PageMetaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageMetaConnection!
+  # paragraph(where: ParagraphWhereUniqueInput!): Paragraph
+  # paragraphs(where: ParagraphWhereInput, orderBy: ParagraphOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Paragraph]!
+  # paragraphsConnection(where: ParagraphWhereInput, orderBy: ParagraphOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ParagraphConnection!
   permission(where: PermissionWhereUniqueInput!): Permission
   permissions(where: PermissionWhereInput, orderBy: PermissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Permission]!
   permissionsConnection(where: PermissionWhereInput, orderBy: PermissionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PermissionConnection!
-  permissionType(where: PermissionTypeWhereUniqueInput!): PermissionType
-  permissionTypes(where: PermissionTypeWhereInput, orderBy: PermissionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PermissionType]!
-  permissionTypesConnection(where: PermissionTypeWhereInput, orderBy: PermissionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PermissionTypeConnection!
+  # permissionType(where: PermissionTypeWhereUniqueInput!): PermissionType
+  # permissionTypes(where: PermissionTypeWhereInput, orderBy: PermissionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PermissionType]!
+  # permissionTypesConnection(where: PermissionTypeWhereInput, orderBy: PermissionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PermissionTypeConnection!
   post(where: PostWhereUniqueInput!): Post
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   property(where: PropertyWhereUniqueInput!): Property
   properties(where: PropertyWhereInput, orderBy: PropertyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Property]!
   propertiesConnection(where: PropertyWhereInput, orderBy: PropertyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PropertyConnection!
-  quote(where: QuoteWhereUniqueInput!): Quote
-  quotes(where: QuoteWhereInput, orderBy: QuoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quote]!
-  quotesConnection(where: QuoteWhereInput, orderBy: QuoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuoteConnection!
-  reply(where: ReplyWhereUniqueInput!): Reply
-  replies(where: ReplyWhereInput, orderBy: ReplyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reply]!
-  repliesConnection(where: ReplyWhereInput, orderBy: ReplyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReplyConnection!
+  # quote(where: QuoteWhereUniqueInput!): Quote
+  # quotes(where: QuoteWhereInput, orderBy: QuoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quote]!
+  # quotesConnection(where: QuoteWhereInput, orderBy: QuoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuoteConnection!
+  # reply(where: ReplyWhereUniqueInput!): Reply
+  # replies(where: ReplyWhereInput, orderBy: ReplyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reply]!
+  # repliesConnection(where: ReplyWhereInput, orderBy: ReplyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReplyConnection!
   site(where: SiteWhereUniqueInput!): Site
   sites(where: SiteWhereInput, orderBy: SiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Site]!
   sitesConnection(where: SiteWhereInput, orderBy: SiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SiteConnection!
-  statement(where: StatementWhereUniqueInput!): Statement
-  statements(where: StatementWhereInput, orderBy: StatementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Statement]!
-  statementsConnection(where: StatementWhereInput, orderBy: StatementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatementConnection!
+  # statement(where: StatementWhereUniqueInput!): Statement
+  # statements(where: StatementWhereInput, orderBy: StatementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Statement]!
+  # statementsConnection(where: StatementWhereInput, orderBy: StatementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatementConnection!
   tag(where: TagWhereUniqueInput!): Tag
   tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag]!
   tagsConnection(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TagConnection!
@@ -5253,9 +5253,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  i18n(where: i18nWhereUniqueInput!): i18n
-  i18ns(where: i18nWhereInput, orderBy: i18nOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [i18n]!
-  i18nsConnection(where: i18nWhereInput, orderBy: i18nOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): i18nConnection!
+  # i18n(where: i18nWhereUniqueInput!): i18n
+  # i18ns(where: i18nWhereInput, orderBy: i18nOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [i18n]!
+  # i18nsConnection(where: i18nWhereInput, orderBy: i18nOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): i18nConnection!
   node(id: ID!): Node
 }
 
@@ -6176,38 +6176,38 @@ input StatementWhereUniqueInput {
   id: UUID
 }
 
-type Subscription {
-  access(where: AccessSubscriptionWhereInput): AccessSubscriptionPayload
-  admin(where: AdminSubscriptionWhereInput): AdminSubscriptionPayload
-  entity(where: EntitySubscriptionWhereInput): EntitySubscriptionPayload
-  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
-  group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
-  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
-  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
-  lang(where: LangSubscriptionWhereInput): LangSubscriptionPayload
-  log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
-  markup(where: MarkupSubscriptionWhereInput): MarkupSubscriptionPayload
-  measurement(where: MeasurementSubscriptionWhereInput): MeasurementSubscriptionPayload
-  news(where: NewsSubscriptionWhereInput): NewsSubscriptionPayload
-  note(where: NoteSubscriptionWhereInput): NoteSubscriptionPayload
-  page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  pageHead(where: PageHeadSubscriptionWhereInput): PageHeadSubscriptionPayload
-  pageMeta(where: PageMetaSubscriptionWhereInput): PageMetaSubscriptionPayload
-  paragraph(where: ParagraphSubscriptionWhereInput): ParagraphSubscriptionPayload
-  permission(where: PermissionSubscriptionWhereInput): PermissionSubscriptionPayload
-  permissionType(where: PermissionTypeSubscriptionWhereInput): PermissionTypeSubscriptionPayload
-  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  property(where: PropertySubscriptionWhereInput): PropertySubscriptionPayload
-  quote(where: QuoteSubscriptionWhereInput): QuoteSubscriptionPayload
-  reply(where: ReplySubscriptionWhereInput): ReplySubscriptionPayload
-  site(where: SiteSubscriptionWhereInput): SiteSubscriptionPayload
-  statement(where: StatementSubscriptionWhereInput): StatementSubscriptionPayload
-  tag(where: TagSubscriptionWhereInput): TagSubscriptionPayload
-  theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  i18n(where: i18nSubscriptionWhereInput): i18nSubscriptionPayload
-}
+# type Subscription {
+#   access(where: AccessSubscriptionWhereInput): AccessSubscriptionPayload
+#   admin(where: AdminSubscriptionWhereInput): AdminSubscriptionPayload
+#   entity(where: EntitySubscriptionWhereInput): EntitySubscriptionPayload
+#   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+#   file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+#   group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
+#   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
+#   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+#   lang(where: LangSubscriptionWhereInput): LangSubscriptionPayload
+#   log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
+#   markup(where: MarkupSubscriptionWhereInput): MarkupSubscriptionPayload
+#   measurement(where: MeasurementSubscriptionWhereInput): MeasurementSubscriptionPayload
+#   news(where: NewsSubscriptionWhereInput): NewsSubscriptionPayload
+#   note(where: NoteSubscriptionWhereInput): NoteSubscriptionPayload
+#   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
+#   pageHead(where: PageHeadSubscriptionWhereInput): PageHeadSubscriptionPayload
+#   pageMeta(where: PageMetaSubscriptionWhereInput): PageMetaSubscriptionPayload
+#   paragraph(where: ParagraphSubscriptionWhereInput): ParagraphSubscriptionPayload
+#   permission(where: PermissionSubscriptionWhereInput): PermissionSubscriptionPayload
+#   permissionType(where: PermissionTypeSubscriptionWhereInput): PermissionTypeSubscriptionPayload
+#   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
+#   property(where: PropertySubscriptionWhereInput): PropertySubscriptionPayload
+#   quote(where: QuoteSubscriptionWhereInput): QuoteSubscriptionPayload
+#   reply(where: ReplySubscriptionWhereInput): ReplySubscriptionPayload
+#   site(where: SiteSubscriptionWhereInput): SiteSubscriptionPayload
+#   statement(where: StatementSubscriptionWhereInput): StatementSubscriptionPayload
+#   tag(where: TagSubscriptionWhereInput): TagSubscriptionPayload
+#   theme(where: ThemeSubscriptionWhereInput): ThemeSubscriptionPayload
+#   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+#   i18n(where: i18nSubscriptionWhereInput): i18nSubscriptionPayload
+# }
 
 type Tag {
   id: ID!
