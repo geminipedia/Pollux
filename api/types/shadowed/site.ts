@@ -1,6 +1,6 @@
 import { Maybe, UUID, Json } from '../../model';
-import { ShadowedPageCreateManyInput } from './page';
-import { ShadowedUserCreateOneInput } from './user';
+import { ShadowedPageCreateManyInput, ShadowedPageUpdateManyInput } from './page';
+import { ShadowedUserCreateOneInput, ShadowedUserUpdateOneRequiredInput } from './user';
 
 export interface ShadowedSiteCreateInput {
   id?: Maybe<UUID>;
@@ -8,5 +8,13 @@ export interface ShadowedSiteCreateInput {
   domain: string;
   menu?: Maybe<ShadowedPageCreateManyInput>;
   creator: ShadowedUserCreateOneInput;
+  meta?: Maybe<Json>;
+}
+
+export interface ShadowedSiteUpdateInput {
+  name: string;
+  domain: string;
+  menu?: Maybe<ShadowedPageUpdateManyInput>;
+  creator: ShadowedUserUpdateOneRequiredInput;
   meta?: Maybe<Json>;
 }
