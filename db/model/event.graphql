@@ -9,6 +9,7 @@ type Event {
   id: UUID! @unique @id
 # ---
   type: EventType! @default(value: LOG)
+  code: String
   result: String
   createdAt: DateTime! @createdAt
 # ---
