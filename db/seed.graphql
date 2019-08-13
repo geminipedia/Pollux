@@ -166,7 +166,7 @@ mutation {
             create: {
               owner: { create: { read: true, write: true, delete: true } }
               group: { create: { read: true, write: true, delete: true } }
-              anyone: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
             }
           }
           layout: {
@@ -194,14 +194,14 @@ mutation {
             create: {
               owner: { create: { read: true, write: true, delete: true } }
               group: { create: { read: true, write: true, delete: true } }
-              anyone: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
             }
           }
           admin: {
             create: {
               owner: { create: { read: true, write: true, delete: true } }
               group: { create: { read: true, write: true, delete: true } }
-              anyone: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
             }
           }
           theme: {
@@ -215,7 +215,7 @@ mutation {
             create: {
               owner: { create: { read: true, write: true, delete: true } }
               group: { create: { read: true, write: true, delete: true } }
-              anyone: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
             }
           }
         }
