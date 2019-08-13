@@ -13,9 +13,7 @@ const createLog = async (type: EventType, context: LogPayload): Promise<void | E
   try {
     let resultMsg: Event['result'];
 
-    if (type === 'ERROR' || type === 'WARNING') {
-      resultMsg = context.code ? fetchMsg(context.code, context.customResult).result : context.customResult;
-    }
+    resultMsg = context.code ? fetchMsg(context.code, context.customResult).result : context.customResult;
 
     if (!context.userId) {
       await prisma.createLog({
