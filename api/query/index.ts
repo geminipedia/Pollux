@@ -7,6 +7,7 @@ import logQuery from './log';
 import adminQuery from './admin';
 import siteQuery from './site';
 import pageQuery from './page';
+import userQuery from './user';
 
 const Query = {
   ...itemQuery,
@@ -17,7 +18,8 @@ const Query = {
   ...logQuery,
   ...adminQuery,
   ...siteQuery,
-  ...pageQuery
+  ...pageQuery,
+  ...userQuery
 };
 
 export default Query;
