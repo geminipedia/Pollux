@@ -40,6 +40,8 @@ const siteMutation = {
         });
       }
 
+      const siteCreated: Site = await prisma.createSite(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -47,7 +49,7 @@ const siteMutation = {
         userId: user.id
       });
 
-      return await prisma.createSite(args.data);
+      return siteCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {

@@ -40,6 +40,8 @@ const adminMutation = {
         });
       }
 
+      const adminCreated: Admin = await prisma.createAdmin(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -47,7 +49,7 @@ const adminMutation = {
         userId: user.id
       });
 
-      return await prisma.createAdmin(args.data);
+      return adminCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
