@@ -5,6 +5,7 @@ import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
 import { ShadowedPostCreateInput, ShadowedPostUpdateInput } from '../types/shadowed/post';
+import overWrite from '../util/overwrite';
 
 const postMutation = {
   async createPost(_: any, args: { data: ShadowedPostCreateInput }, context: Context): Promise<Post> {
@@ -29,6 +30,9 @@ const postMutation = {
           userId: author.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.post.create(args.data, author);
 
       const postCreated: Post = await prisma.createPost(args.data);
 
@@ -87,6 +91,9 @@ const postMutation = {
           userId: author.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.post.update(args.data, author);
 
       const postUpdated: Post = await prisma.updatePost({ ...args });
 

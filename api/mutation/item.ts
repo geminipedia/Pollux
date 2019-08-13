@@ -5,6 +5,7 @@ import { ShadowedItemCreateInput, ShadowedItemUpdateInput } from '../types/shado
 import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
+import overWrite from '../util/overwrite';
 
 const itemMutation = {
   async createItem(_: any, args: { data: ShadowedItemCreateInput }, context: Context): Promise<Item> {
@@ -41,6 +42,9 @@ const itemMutation = {
           userId: user.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.item.create(args.data, user);
 
       const itemCreated: Item = await prisma.createItem(args.data);
 
@@ -100,6 +104,9 @@ const itemMutation = {
           userId: user.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.item.update(args.data, user);
 
       const itemUpdated: Item = await prisma.updateItem({ ...args });
 

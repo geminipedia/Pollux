@@ -1,10 +1,11 @@
 import { Context } from 'graphql-yoga/dist/types';
 
 import { prisma, News, NewsCreateInput, User, NewsUpdateInput, NewsWhereUniqueInput } from '../model';
+import { ShadowedNewsCreateInput, ShadowedNewsUpdateInput } from '../types/shadowed/news';
 import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
-import { ShadowedNewsCreateInput, ShadowedNewsUpdateInput } from '../types/shadowed/news';
+import overWrite from '../util/overwrite';
 
 const newsMutation = {
   async createNews(_: any, args: { data: ShadowedNewsCreateInput }, context: Context): Promise<News> {
@@ -29,6 +30,9 @@ const newsMutation = {
           userId: author.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.news.create(args.data, author);
 
       const newsCreated: News = await prisma.createNews(args.data);
 
@@ -88,6 +92,9 @@ const newsMutation = {
           userId: author.id
         });
       }
+
+      // Force overwrite user connect to prevent fake identity
+      args.data = overWrite.news.update(args.data, author);
 
       const newsUpdated: News = await prisma.updateNews({ ...args });
 
