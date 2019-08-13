@@ -8,7 +8,6 @@ import expressSession from 'express-session';
 import path from 'path';
 import * as dotenv from 'dotenv';
 
-import { typeDefs } from './model/prisma-schema';
 import { prisma } from './model';
 import Query from './query';
 import Mutation from './mutation';
@@ -18,7 +17,7 @@ import auth from './auth';
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './api/types/typedefs.graphql',
   resolvers: {
     Query,
     Mutation,
