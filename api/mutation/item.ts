@@ -1,12 +1,13 @@
 import { Context } from 'graphql-yoga/dist/types';
 
 import { prisma, Item, ItemCreateInput, User, ItemUpdateInput, ItemWhereUniqueInput } from '../model';
+import { ShadowedItemCreateInput, ShadowedItemUpdateInput } from '../types/shadowed/item';
 import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
 
 const itemMutation = {
-  async createItem(_: any, args: { data: ItemCreateInput }, context: Context): Promise<Item> {
+  async createItem(_: any, args: { data: ShadowedItemCreateInput }, context: Context): Promise<Item> {
     try {
       const user: User = await auth.token.parse(context.request);
 
@@ -65,7 +66,7 @@ const itemMutation = {
     }
   },
 
-  async updateItem(_: any, args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
+  async updateItem(_: any, args: { data: ShadowedItemUpdateInput, where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
     try {
       const user: User = await auth.token.parse(context.request);
 

@@ -4,9 +4,10 @@ import { prisma, News, NewsCreateInput, User, NewsUpdateInput, NewsWhereUniqueIn
 import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
+import { ShadowedNewsCreateInput, ShadowedNewsUpdateInput } from '../types/shadowed/news';
 
 const newsMutation = {
-  async createNews(_: any, args: { data: NewsCreateInput }, context: Context): Promise<News> {
+  async createNews(_: any, args: { data: ShadowedNewsCreateInput }, context: Context): Promise<News> {
     try {
       const author: User = await auth.token.parse(context.request);
 
@@ -53,7 +54,7 @@ const newsMutation = {
     }
   },
 
-  async updateNews(_: any, args: { data: NewsUpdateInput, where: NewsWhereUniqueInput }, context: Context): Promise<News> {
+  async updateNews(_: any, args: { data: ShadowedNewsUpdateInput, where: NewsWhereUniqueInput }, context: Context): Promise<News> {
     try {
       const author: User = await auth.token.parse(context.request);
 

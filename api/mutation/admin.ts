@@ -1,12 +1,13 @@
 import { Context } from 'graphql-yoga/dist/types';
 
-import { prisma, Admin, AdminCreateInput, User } from '../model';
+import { prisma, Admin, User } from '../model';
+import { ShadowedAdminCreateInput } from '../types/shadowed/admin';
 import log from '../util/log';
 import auth from '../auth';
 import group, { PermissionTypePayload } from '../auth/group';
 
 const adminMutation = {
-  async createAdmin(_: any, args: { data: AdminCreateInput }, context: Context): Promise<Admin> {
+  async createAdmin(_: any, args: { data: ShadowedAdminCreateInput }, context: Context): Promise<Admin> {
     try {
       const user: User = await auth.token.parse(context.request);
 

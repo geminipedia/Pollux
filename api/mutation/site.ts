@@ -1,12 +1,13 @@
 import { Context } from 'graphql-yoga/dist/types';
 
-import { prisma, Site, SiteCreateInput, User } from '../model';
+import { prisma, Site, User } from '../model';
+import { ShadowedSiteCreateInput } from '../types/shadowed/site';
 import log from '../util/log';
 import auth from '../auth';
 import group, { PermissionTypePayload } from '../auth/group';
 
 const siteMutation = {
-  async createSite(_: any, args: { data: SiteCreateInput }, context: Context): Promise<Site> {
+  async createSite(_: any, args: { data: ShadowedSiteCreateInput }, context: Context): Promise<Site> {
     try {
       const user: User = await auth.token.parse(context.request);
 

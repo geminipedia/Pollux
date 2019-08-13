@@ -4,9 +4,10 @@ import { prisma, Post, PostCreateInput, User, PostUpdateInput, PostWhereUniqueIn
 import group, { PermissionTypePayload, RelationPayload } from '../auth/group';
 import log from '../util/log';
 import auth from '../auth';
+import { ShadowedPostCreateInput, ShadowedPostUpdateInput } from '../types/shadowed/post';
 
 const postMutation = {
-  async createPost(_: any, args: { data: PostCreateInput }, context: Context): Promise<Post> {
+  async createPost(_: any, args: { data: ShadowedPostCreateInput }, context: Context): Promise<Post> {
     try {
       const author: User = await auth.token.parse(context.request);
 
@@ -53,7 +54,7 @@ const postMutation = {
     }
   },
 
-  async updatePost(_: any, args: { data: PostUpdateInput, where: PostWhereUniqueInput }, context: Context): Promise<Post> {
+  async updatePost(_: any, args: { data: ShadowedPostUpdateInput, where: PostWhereUniqueInput }, context: Context): Promise<Post> {
     try {
       const author: User = await auth.token.parse(context.request);
       if (!author) {
