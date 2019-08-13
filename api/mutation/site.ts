@@ -87,9 +87,9 @@ const siteMutation = {
         });
       }
 
-      const targetSite: Site = await prisma.site(args.where);
+      const siteExist: Site = await prisma.site(args.where);
 
-      if (!targetSite) {
+      if (!siteExist) {
         // Write Log
         throw await log.warn({
           ip: context.request.ip,
@@ -144,9 +144,9 @@ const siteMutation = {
         });
       }
 
-      const targetSite: Site = await prisma.site(args.where);
+      const siteExist: Site = await prisma.site(args.where);
 
-      if (!targetSite) {
+      if (!siteExist) {
         // Write Log
         throw await log.warn({
           ip: context.request.ip,

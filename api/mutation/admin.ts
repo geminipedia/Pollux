@@ -87,9 +87,9 @@ const adminMutation = {
         });
       }
 
-      const targetAdmin: Admin = await prisma.admin(args.where);
+      const adminExist: Admin = await prisma.admin(args.where);
 
-      if (!targetAdmin) {
+      if (!adminExist) {
         // Write Log
         throw await log.warn({
           ip: context.request.ip,
@@ -144,9 +144,9 @@ const adminMutation = {
         });
       }
 
-      const targetAdmin: Admin = await prisma.admin(args.where);
+      const adminExist: Admin = await prisma.admin(args.where);
 
-      if (!targetAdmin) {
+      if (!adminExist) {
         // Write Log
         throw await log.warn({
           ip: context.request.ip,
