@@ -18,7 +18,7 @@ enum ThemeTarget {
 type Theme {
   id: UUID! @unique @id
 # ---
-  name: String!
+  name: String! @unique
   description: String
   component: String
   type: ThemeType
