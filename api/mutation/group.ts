@@ -40,6 +40,8 @@ const groupMutation = {
         });
       }
 
+      const groupCreated: Group = await prisma.createGroup(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -47,7 +49,7 @@ const groupMutation = {
         userId: user.id
       });
 
-      return prisma.createGroup(args.data);
+      return groupCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {

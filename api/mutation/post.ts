@@ -29,6 +29,8 @@ const postMutation = {
         });
       }
 
+      const postCreated: Post = await prisma.createPost(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -36,7 +38,7 @@ const postMutation = {
         userId: author.id
       });
 
-      return prisma.createPost(args.data);
+      return postCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -85,6 +87,8 @@ const postMutation = {
         });
       }
 
+      const postUpdated: Post = await prisma.updatePost({ ...args });
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -92,7 +96,7 @@ const postMutation = {
         userId: author.id
       });
 
-      return prisma.updatePost({ ...args });
+      return postUpdated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -132,6 +136,8 @@ const postMutation = {
         });
       }
 
+      const postDeleted: Post = await prisma.deletePost(args.where);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -139,7 +145,7 @@ const postMutation = {
         userId: author.id
       });
 
-      return prisma.deletePost(args.where);
+      return postDeleted;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {

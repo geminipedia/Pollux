@@ -40,6 +40,9 @@ const itemMutation = {
           userId: user.id
         });
       }
+
+      const itemCreated: Item = await prisma.createItem(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -47,7 +50,7 @@ const itemMutation = {
         userId: user.id
       });
 
-      return prisma.createItem(args.data);
+      return itemCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -97,6 +100,8 @@ const itemMutation = {
         });
       }
 
+      const itemUpdated: Item = await prisma.updateItem({ ...args });
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -104,7 +109,7 @@ const itemMutation = {
         userId: user.id
       });
 
-      return prisma.updateItem({ ...args });
+      return itemUpdated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -142,9 +147,9 @@ const itemMutation = {
           code: '#ERR_FF00',
           userId: user.id
         });
-
-        return;
       }
+
+      const itemDeleted: Item = await prisma.deleteItem(args.where);
 
       // Write Log
       await log.write({
@@ -153,7 +158,7 @@ const itemMutation = {
         userId: user.id
       });
 
-      return prisma.deleteItem(args.where);
+      return itemDeleted;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {

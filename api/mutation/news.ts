@@ -29,6 +29,8 @@ const newsMutation = {
         });
       }
 
+      const newsCreated: News = await prisma.createNews(args.data);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -36,7 +38,7 @@ const newsMutation = {
         userId: author.id
       });
 
-      return prisma.createNews(args.data);
+      return newsCreated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -86,6 +88,8 @@ const newsMutation = {
         });
       }
 
+      const newsUpdated: News = await prisma.updateNews({ ...args });
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -93,7 +97,7 @@ const newsMutation = {
         userId: author.id
       });
 
-      return prisma.updateNews({ ...args });
+      return newsUpdated;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
@@ -133,6 +137,8 @@ const newsMutation = {
         });
       }
 
+      const newsDeleted: News = await prisma.deleteNews(args.where);
+
       // Write Log
       await log.write({
         ip: context.request.ip,
@@ -140,7 +146,7 @@ const newsMutation = {
         userId: author.id
       });
 
-      return prisma.deleteNews(args.where);
+      return newsDeleted;
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
