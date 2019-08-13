@@ -1,21 +1,30 @@
-import { prisma, Log, Event, User, EventType } from '../model';
+import { prisma, Log, Event, User, EventType } from '../../model';
+import fetchMsg, { FetchMessagePayload } from './fetchMsg';
 
 interface LogPayload {
   ip: Log['ip'];
-  result: Event['result'];
+  code?: Event['code'];
+  customResult?: Event['result'];
   userId?: User['id'];
   meta?: Log['meta'];
 }
 
 const createLog = async (type: EventType, context: LogPayload): Promise<void> => {
   try {
+    let resultMsg: Event['result'];
+
+    if (type === 'ERROR' || type === 'WARNING') {
+      resultMsg = context.code ? fetchMsg(context.code, context.customResult).result : context.customResult;
+    }
+
     if (!context.userId) {
       await prisma.createLog({
         ip: context.ip,
         event: {
           create: {
             type,
-            result: context.result
+            code: context.code,
+            result: resultMsg
           }
         }
       });
@@ -25,7 +34,8 @@ const createLog = async (type: EventType, context: LogPayload): Promise<void> =>
         event: {
           create: {
             type,
-            result: context.result
+            code: context.code,
+            result: resultMsg
           }
         },
         user: {
@@ -34,6 +44,10 @@ const createLog = async (type: EventType, context: LogPayload): Promise<void> =>
           }
         }
       });
+    }
+
+    if (type === 'ERROR' || type === 'WARNING') {
+      throw new Error(`${context.code}: ${resultMsg}`);
     }
   } catch (error) {
     throw new Error(error);
