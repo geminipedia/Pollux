@@ -1,0 +1,227 @@
+mutation {
+  normalGroup: createGroup(
+    data: {
+      name: "normal"
+      permission: {
+        create: {
+          type: "normal"
+          loginAdmin: false
+          banned: false
+          news: {
+            create: {
+              owner: { create: { read: true, write: false, delete: false } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          post: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          reply: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          item: {
+            create: {
+              owner: { create: { read: true, write: false, delete: false } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          property: {
+            create: {
+              owner: { create: { read: true, write: false, delete: false } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          user: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          group: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          layout: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          log: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          analytics: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          site: {
+            create: {
+              owner: { create: { read: true, write: false, delete: false } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+          admin: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          theme: {
+            create: {
+              owner: { create: { read: false, write: false, delete: false } }
+              group: { create: { read: false, write: false, delete: false } }
+              anyone: { create: { read: false, write: false, delete: false } }
+            }
+          }
+          page: {
+            create: {
+              owner: { create: { read: true, write: false, delete: false } }
+              group: { create: { read: true, write: false, delete: false } }
+              anyone: { create: { read: true, write: false, delete: false } }
+            }
+          }
+        }
+      }
+    }
+  ) {
+    id
+  }
+
+  adminGroup: createGroup(
+    data: {
+      name: "admin"
+      permission: {
+        create: {
+          type: "admin"
+          loginAdmin: true
+          banned: false
+          news: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          post: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          reply: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          item: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
+            }
+          }
+          property: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
+            }
+          }
+          user: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          group: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          layout: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
+            }
+          }
+          log: {
+            create: {
+              owner: { create: { read: true, write: false, delete: true } }
+              group: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          analytics: {
+            create: {
+              owner: { create: { read: true, write: false, delete: true } }
+              group: { create: { read: true, write: false, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          site: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          admin: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+          theme: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: true, delete: true } }
+            }
+          }
+          page: {
+            create: {
+              owner: { create: { read: true, write: true, delete: true } }
+              group: { create: { read: true, write: true, delete: true } }
+              anyone: { create: { read: true, write: false, delete: true } }
+            }
+          }
+        }
+      }
+    }
+  ) {
+    id
+  }
+}

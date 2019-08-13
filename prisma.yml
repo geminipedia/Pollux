@@ -27,6 +27,10 @@ datamodel:
   - ./db/service/site.graphql
   - ./db/service/page.graphql
   - ./db/service/theme.graphql
+
+seed:
+  import: ./db/seed.graphql
+
 generate:
   - generator: typescript-client
     output: ./api/model
