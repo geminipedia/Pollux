@@ -7,9 +7,8 @@ import auth from '../auth';
 
 const postQuery = {
   async post(_: any, args: { where: PostWhereUniqueInput }, context: Context): Promise<Post> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
+      const viewer: User = await auth.token.parse(context.request);
       const targetPost: Post = await prisma.post(args.where);
 
       if (!viewer && targetPost.published) {
@@ -70,9 +69,9 @@ const postQuery = {
     },
     context: Context
   ): Promise<Post[]> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
+      const viewer: User = await auth.token.parse(context.request);
+
       if (!viewer) {
         return await prisma.posts({ where: { published: true } });
       }

@@ -7,9 +7,9 @@ import auth from '../auth';
 
 const logQuery = {
   async log(_: any, args: { where: LogWhereUniqueInput }, context: Context): Promise<Log> {
-    const user: User = await auth.token.parse(context.request);
-
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         log.warn({

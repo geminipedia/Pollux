@@ -7,9 +7,9 @@ import auth from '../auth';
 
 const adminQuery = {
   async admin(_: any, args: { where: AdminWhereUniqueInput }, context: Context): Promise<Admin> {
-    const user: User = await auth.token.parse(context.request);
-
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         log.warn({
@@ -70,9 +70,9 @@ const adminQuery = {
     },
     context: Context
   ): Promise<Admin[]> {
-    const user: User = await auth.token.parse(context.request);
-
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         log.warn({

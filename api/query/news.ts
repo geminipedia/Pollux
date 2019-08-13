@@ -7,9 +7,8 @@ import auth from '../auth';
 
 const newsQuery = {
   async news(_: any, args: { where: NewsWhereUniqueInput }, context: Context): Promise<News> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
+      const viewer: User = await auth.token.parse(context.request);
       const targetNews: News = await prisma.news(args.where);
 
       if (!viewer && targetNews.published) {
@@ -70,9 +69,9 @@ const newsQuery = {
     },
     context: Context
   ): Promise<News[]> {
-    const viewer: User = await auth.token.parse(context.request);
-
     try {
+      const viewer: User = await auth.token.parse(context.request);
+
       if (!viewer) {
         return await prisma.newses({ where: { published: true } });
       }

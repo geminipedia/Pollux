@@ -7,9 +7,9 @@ import auth from '../auth';
 
 const groupQuery = {
   async group(_: any, args: { where: GroupWhereUniqueInput }, context: Context): Promise<Group> {
-    const user: User = await auth.token.parse(context.request);
-
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         log.warn({
@@ -70,9 +70,9 @@ const groupQuery = {
     },
     context: Context
   ): Promise<Group[]> {
-    const user: User = await auth.token.parse(context.request);
-
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         log.warn({
