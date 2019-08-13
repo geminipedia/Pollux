@@ -12,7 +12,7 @@ const adminQuery = {
 
       if (!user) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -23,7 +23,7 @@ const adminQuery = {
 
       if (!targetAdmin) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_A001',
           userId: user.id
@@ -35,7 +35,7 @@ const adminQuery = {
 
       if (!(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -46,7 +46,7 @@ const adminQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

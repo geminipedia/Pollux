@@ -14,7 +14,7 @@ const itemMutation = {
 
       if (!user) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -22,7 +22,7 @@ const itemMutation = {
 
       if (!permission.owner.write) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -35,7 +35,7 @@ const itemMutation = {
 
       if (itemExist) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_I000',
           customResult: `${itemExist.itemId} ${itemExist.name}`,
@@ -53,7 +53,7 @@ const itemMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -70,7 +70,7 @@ const itemMutation = {
     try {
       if (!user) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -80,7 +80,7 @@ const itemMutation = {
 
       if (!targetItem) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_I001',
           userId: user.id
@@ -92,7 +92,7 @@ const itemMutation = {
 
       if (!(permission.anyone.write || (permission.group.write && relation.isMember) || (permission.owner.write && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -110,7 +110,7 @@ const itemMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -127,7 +127,7 @@ const itemMutation = {
     try {
       if (!user) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -141,7 +141,7 @@ const itemMutation = {
 
       if (!(permission.anyone.delete || (permission.group.delete && relation.isMember) || (permission.owner.delete && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -161,7 +161,7 @@ const itemMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

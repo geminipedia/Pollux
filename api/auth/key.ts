@@ -20,12 +20,12 @@ const verify = async (token: string, req: Request): Promise<UserSignPayload> => 
   jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async (error, payload: UserSignPayload) => {
     if (error) {
       // Write Log
-      await log.error({
+      const err = await log.error({
         ip: req.ip,
         code: '#ERR_U00F'
       });
 
-      reject(new Error('#ERR_U00F'));
+      reject(err);
     }
 
     resolve(payload);

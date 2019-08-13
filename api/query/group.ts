@@ -12,7 +12,7 @@ const groupQuery = {
 
       if (!user) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -23,7 +23,7 @@ const groupQuery = {
 
       if (!targetGroup) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_G001',
           userId: user.id
@@ -35,7 +35,7 @@ const groupQuery = {
 
       if (!(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id

@@ -14,7 +14,7 @@ const newsQuery = {
       if (!viewer && targetNews.published) {
         return targetNews;
       } else if (!viewer) {
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -25,7 +25,7 @@ const newsQuery = {
 
       if (!targetNews.published && !(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: viewer.id
@@ -34,7 +34,7 @@ const newsQuery = {
 
       if (!targetNews) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_N001',
           userId: viewer.id
@@ -45,7 +45,7 @@ const newsQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -102,7 +102,7 @@ const newsQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

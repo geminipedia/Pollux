@@ -12,7 +12,7 @@ const userQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -41,7 +41,7 @@ const userQuery = {
 
       if (!user) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -51,7 +51,7 @@ const userQuery = {
 
       if (!permission.anyone.read) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -61,7 +61,7 @@ const userQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

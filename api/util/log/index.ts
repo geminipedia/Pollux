@@ -9,7 +9,7 @@ interface LogPayload {
   meta?: Log['meta'];
 }
 
-const createLog = async (type: EventType, context: LogPayload): Promise<void> => {
+const createLog = async (type: EventType, context: LogPayload): Promise<void | Error> => {
   try {
     let resultMsg: Event['result'];
 
@@ -47,18 +47,18 @@ const createLog = async (type: EventType, context: LogPayload): Promise<void> =>
     }
 
     if (type === 'ERROR' || type === 'WARNING') {
-      throw new Error(`${context.code}: ${resultMsg}`);
+      return new Error(`${context.code}: ${resultMsg}`);
     }
   } catch (error) {
-    throw new Error(error);
+    return new Error(error.message);
   }
 };
 
 const log = {
-  error: async (context: LogPayload): Promise<void> => createLog('ERROR', context),
-  warn: async (context: LogPayload): Promise<void> => createLog('WARNING', context),
-  info: async (context: LogPayload): Promise<void> => createLog('INFO', context),
-  write: async (context: LogPayload): Promise<void> => createLog('LOG', context)
+  error: async (context: LogPayload): Promise<void | Error> => createLog('ERROR', context),
+  warn: async (context: LogPayload): Promise<void | Error> => createLog('WARNING', context),
+  info: async (context: LogPayload): Promise<void | Error> => createLog('INFO', context),
+  write: async (context: LogPayload): Promise<void | Error> => createLog('LOG', context)
 };
 
 export default log;

@@ -67,7 +67,7 @@ const user = {
       });
     } catch (error) {
       // Write Log
-      await log.error({
+      throw await log.error({
         ip: req.ip,
         code: '#ERR_FFFF',
         customResult: error.message
@@ -101,14 +101,12 @@ const user = {
 
     } catch (error) {
       // Write Log
-      await log.error({
+      throw await log.error({
         ip: req.ip,
         code: '#ERR_U00F',
         customResult: `account ${userEmail}`,
         userId
       });
-
-      throw new Error('ERR_U00F');
     }
   }
 };

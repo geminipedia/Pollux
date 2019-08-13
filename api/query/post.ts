@@ -14,7 +14,7 @@ const postQuery = {
       if (!viewer && targetPost.published) {
         return targetPost;
       } else if (!viewer) {
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -25,7 +25,7 @@ const postQuery = {
 
       if (!targetPost.published && !(permission.anyone.read || (permission.group.read && relation.isMember) || (permission.owner.read && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: viewer.id
@@ -34,7 +34,7 @@ const postQuery = {
 
       if (!targetPost) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_P001',
           userId: viewer.id
@@ -45,7 +45,7 @@ const postQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -102,7 +102,7 @@ const postQuery = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

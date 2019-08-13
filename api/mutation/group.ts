@@ -13,7 +13,7 @@ const groupMutation = {
 
       if (!user) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -21,7 +21,7 @@ const groupMutation = {
 
       if (!permission.anyone.write) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: user.id
@@ -32,7 +32,7 @@ const groupMutation = {
 
       if (groupExist) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_G000',
           customResult: groupExist.name,
@@ -50,7 +50,7 @@ const groupMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        await log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message

@@ -14,7 +14,7 @@ const postMutation = {
 
       if (!author) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -22,7 +22,7 @@ const postMutation = {
 
       if (!permission.owner.write) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: author.id
@@ -40,7 +40,7 @@ const postMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -57,7 +57,7 @@ const postMutation = {
     try {
       if (!author) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -67,7 +67,7 @@ const postMutation = {
 
       if (!targetPost) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_M001',
           userId: author.id
@@ -79,7 +79,7 @@ const postMutation = {
 
       if (!(permission.anyone.write || (permission.group.write && relation.isMember) || (permission.owner.write && relation.isOwner))) {
         // Write Log
-        await log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: author.id
@@ -97,7 +97,7 @@ const postMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
@@ -114,7 +114,7 @@ const postMutation = {
     try {
       if (!author) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00'
         });
@@ -126,7 +126,7 @@ const postMutation = {
 
       if (!(permission.anyone.delete || (permission.group.delete && relation.isMember) || (permission.owner.delete && relation.isOwner))) {
         // Write Log
-        log.warn({
+        throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_FF00',
           userId: author.id
@@ -144,7 +144,7 @@ const postMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        log.error({
+        throw await log.error({
           ip: context.request.ip,
           code: '#ERR_FFFF',
           customResult: error.message
