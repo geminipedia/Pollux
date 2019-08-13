@@ -1,7 +1,7 @@
 type Site implements Core {
   id: UUID! @unique @id
 # ---
-  name: String!
+  name: String! @unique
   domain: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

@@ -1,7 +1,7 @@
 type Admin implements Site {
   id: UUID! @unique @id
 # ---
-  name: String!
+  name: String! @unique
   domain: String!
   public: Boolean! @default(value: false)
   createdAt: DateTime! @createdAt
