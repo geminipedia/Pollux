@@ -16,17 +16,15 @@ const itemMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!permission.owner.write) {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
 
@@ -39,16 +37,15 @@ const itemMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: `#ERR_I000 Item ${itemExist.name} already existed.`,
+          code: '#ERR_I000',
+          customResult: `${itemExist.itemId} ${itemExist.name}`,
           userId: user.id
         });
-
-        throw new Error(`#ERR_I000 Item ${itemExist.name} already existed.`);
       }
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Item ${args.data.name} create successed.`,
+        customResult: `Item ${args.data.name} create successed.`,
         userId: user.id
       });
 
@@ -58,11 +55,12 @@ const itemMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -74,10 +72,8 @@ const itemMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetItem: Item = await prisma.item(args.where);
@@ -86,11 +82,9 @@ const itemMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_I001: Item not found.',
+          code: '#ERR_I001',
           userId: user.id
         });
-
-        throw new Error('#ERR_I001: Item not found.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
@@ -100,17 +94,15 @@ const itemMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Item ${targetItem.name} updated by ${user.displayName}.`,
+        customResult: `Item ${targetItem.name} updated by ${user.displayName}.`,
         userId: user.id
       });
 
@@ -120,11 +112,12 @@ const itemMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -136,7 +129,7 @@ const itemMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
 
         return;
@@ -150,7 +143,7 @@ const itemMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
 
@@ -160,7 +153,7 @@ const itemMutation = {
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Item ${targetItem.name} updated by ${user.displayName}.`,
+        customResult: `Item ${targetItem.name} updated by ${user.displayName}.`,
         userId: user.id
       });
 
@@ -170,11 +163,12 @@ const itemMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

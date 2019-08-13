@@ -22,8 +22,9 @@ const verify = async (token: string, req: Request): Promise<UserSignPayload> => 
       // Write Log
       await log.error({
         ip: req.ip,
-        result: `Token ${token} authorization failed.\n\nError: ${error}`
+        code: '#ERR_U00F'
       });
+
       reject(new Error('#ERR_U00F'));
     }
 

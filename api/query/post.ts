@@ -17,10 +17,8 @@ const postQuery = {
       } else if (!viewer) {
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(viewer, 'post');
@@ -30,35 +28,32 @@ const postQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: viewer.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!targetPost) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_P001: Post not found.',
+          code: '#ERR_P001',
           userId: viewer.id
         });
-
-        throw new Error('#ERR_P001: Post not found.');
       }
 
       return targetPost;
     } catch (error) {
-      /// Write Log
+      // Write Log
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -110,11 +105,12 @@ const postQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

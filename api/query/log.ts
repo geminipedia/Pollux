@@ -14,10 +14,8 @@ const logQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetLog: Log = await prisma.log(args.where);
@@ -28,22 +26,18 @@ const logQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!targetLog) {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_L001: Log not found.',
+          code: '#ERR_L001',
           userId: user.id
         });
-
-        throw new Error('#ERR_L001: Log not found.');
       }
 
       return targetLog;
@@ -52,11 +46,12 @@ const logQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -80,10 +75,8 @@ const logQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'log');
@@ -110,11 +103,12 @@ const logQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

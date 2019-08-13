@@ -12,11 +12,12 @@ const propertyQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -40,11 +41,12 @@ const propertyQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

@@ -14,11 +14,9 @@ const adminQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetAdmin: Admin = await prisma.admin(args.where);
@@ -27,11 +25,9 @@ const adminQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_A001: Admin not found.',
+          code: '#ERR_A001',
           userId: user.id
         });
-
-        throw new Error('#ERR_A001: Admin not found.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'admin');
@@ -41,11 +37,9 @@ const adminQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       return targetAdmin;
@@ -54,11 +48,12 @@ const adminQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -82,10 +77,8 @@ const adminQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
@@ -112,11 +105,12 @@ const adminQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

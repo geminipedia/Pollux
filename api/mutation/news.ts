@@ -16,27 +16,23 @@ const newsMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!permission.owner.write) {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `News ${args.data.title} create successed.`,
+        customResult: `News ${args.data.title} create successed.`,
         userId: author.id
       });
 
@@ -44,13 +40,14 @@ const newsMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        await log.error({
+        log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -62,10 +59,8 @@ const newsMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetNews: News = await prisma.news(args.where);
@@ -74,11 +69,9 @@ const newsMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_N001: News not found.',
+          code: '#ERR_N001',
           userId: author.id
         });
-
-        throw new Error('#ERR_N001: News not found.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(author, 'news');
@@ -88,17 +81,15 @@ const newsMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `News ${targetNews.title} updated by ${author.displayName}.`,
+        customResult: `News ${targetNews.title} updated by ${author.displayName}.`,
         userId: author.id
       });
 
@@ -108,11 +99,12 @@ const newsMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -124,10 +116,8 @@ const newsMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        return;
       }
 
       const targetNews: News = await prisma.news(args.where);
@@ -138,17 +128,15 @@ const newsMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        return;
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `News ${targetNews.title} updated by ${author.displayName}.`,
+        customResult: `News ${targetNews.title} updated by ${author.displayName}.`,
         userId: author.id
       });
 
@@ -158,11 +146,12 @@ const newsMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

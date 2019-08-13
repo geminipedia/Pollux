@@ -62,17 +62,16 @@ const user = {
       // Write Log
       await log.write({
         ip: req.ip,
-        result: 'Create user account successed.',
+        customResult: 'Create user account successed.',
         userId: newUser.id
       });
     } catch (error) {
       // Write Log
       await log.error({
         ip: req.ip,
-        result: `#ERR_FFFF: Unexpected error.\n\nError: ${error.message}`
+        code: '#ERR_FFFF',
+        customResult: error.message
       });
-
-      throw new Error('ERR_FFFF');
     }
   },
 
@@ -96,7 +95,7 @@ const user = {
       // Write Log
       await log.write({
         ip: req.ip,
-        result: `Account ${userEmail} authorization successd.`,
+        customResult: `Account ${userEmail} authorization successd.`,
         userId
       });
 
@@ -104,7 +103,8 @@ const user = {
       // Write Log
       await log.error({
         ip: req.ip,
-        result: `#ERR_U00F: Account ${userEmail} authorization failed.\n\nError: ${error.message}`,
+        code: '#ERR_U00F',
+        customResult: `account ${userEmail}`,
         userId
       });
 

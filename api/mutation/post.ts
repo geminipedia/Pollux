@@ -16,27 +16,23 @@ const postMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!permission.owner.write) {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Post ${args.data.title} create successed.`,
+        customResult: `Post ${args.data.title} create successed.`,
         userId: author.id
       });
 
@@ -44,13 +40,14 @@ const postMutation = {
     } catch (error) {
       // Write Log
       if (!/#ERR_/.test(error.message)) {
-        await log.error({
+        log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -62,10 +59,8 @@ const postMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetPost: Post = await prisma.post(args.where);
@@ -74,11 +69,9 @@ const postMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_P001: Post not found.',
+          code: '#ERR_M001',
           userId: author.id
         });
-
-        throw new Error('#ERR_P001: Post not found.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(author, 'post');
@@ -88,17 +81,15 @@ const postMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Post ${targetPost.title} updated by ${author.displayName}.`,
+        customResult: `Post ${targetPost.title} updated by ${author.displayName}.`,
         userId: author.id
       });
 
@@ -108,11 +99,12 @@ const postMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -124,10 +116,8 @@ const postMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        return;
       }
 
       const targetPost: Post = await prisma.post(args.where);
@@ -138,17 +128,15 @@ const postMutation = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: author.id
         });
-
-        return;
       }
 
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Post ${targetPost.title} updated by ${author.displayName}.`,
+        customResult: `Post ${targetPost.title} updated by ${author.displayName}.`,
         userId: author.id
       });
 
@@ -158,11 +146,12 @@ const postMutation = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

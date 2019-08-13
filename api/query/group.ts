@@ -14,11 +14,9 @@ const groupQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const targetGroup: Group = await prisma.group(args.where);
@@ -27,11 +25,9 @@ const groupQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_G001: Group not found.',
+          code: '#ERR_G001',
           userId: user.id
         });
-
-        throw new Error('#ERR_G001: Group not found.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
@@ -41,11 +37,9 @@ const groupQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       return targetGroup;
@@ -54,11 +48,12 @@ const groupQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -82,10 +77,8 @@ const groupQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
@@ -112,11 +105,12 @@ const groupQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

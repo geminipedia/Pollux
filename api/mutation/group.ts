@@ -15,21 +15,17 @@ const groupMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.'
+          code: '#ERR_FF00'
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       if (!permission.anyone.write) {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: '#ERR_F000: Permission Deny.',
+          code: '#ERR_FF00',
           userId: user.id
         });
-
-        throw new Error('#ERR_F000: Permission Deny.');
       }
 
       const groupExist: Group = await prisma.group({ name: args.data.name });
@@ -38,16 +34,15 @@ const groupMutation = {
         // Write Log
         await log.warn({
           ip: context.request.ip,
-          result: `#ERR_G000 Group ${groupExist.name} already existed.`,
+          code: '#ERR_G000',
+          customResult: groupExist.name,
           userId: user.id
         });
-
-        throw new Error(`#ERR_G000 Group ${groupExist.name} already existed.`);
       }
       // Write Log
       await log.write({
         ip: context.request.ip,
-        result: `Group ${args.data.name} create successed.`,
+        customResult: `Group ${args.data.name} create successed.`,
         userId: user.id
       });
 
@@ -57,11 +52,12 @@ const groupMutation = {
       if (!/#ERR_/.test(error.message)) {
         await log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };

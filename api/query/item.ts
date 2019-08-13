@@ -11,10 +11,8 @@ const itemQuery = {
         // Write Log
         log.warn({
           ip: context.request.ip,
-          result: '#ERR_I001: Item not found.'
+          code: '#ERR_I001'
         });
-
-        throw new Error('#ERR_I001: Item not found.');
       }
 
       return targetItem;
@@ -23,11 +21,12 @@ const itemQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   },
 
@@ -51,11 +50,12 @@ const itemQuery = {
       if (!/#ERR_/.test(error.message)) {
         log.error({
           ip: context.request.ip,
-          result: `#ERR_FFFF Unexpected Error. ${error.message}`
+          code: '#ERR_FFFF',
+          customResult: error.message
         });
       }
 
-      throw new Error(error.message || '#ERR_FFFF');
+      throw new Error(error.message);
     }
   }
 };
