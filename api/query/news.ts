@@ -73,7 +73,7 @@ const newsQuery = {
       first?: number;
       last?: number;
     },
-    context: Context,
+    context: Context
   ): Promise<News[]> {
     const viewer: User = await auth.token.parse(context.request);
 
