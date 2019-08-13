@@ -1,4 +1,4 @@
-import { User } from './model/index';
+import { User } from './model';
 
 export interface UserSignPayload {
   id: User['id'];
