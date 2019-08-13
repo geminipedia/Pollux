@@ -6,11 +6,9 @@ import log from '../util/log';
 import auth from '../auth';
 
 const itemMutation = {
-  async createItem(_, args: { data: ItemCreateInput }, context: Context): Promise<Item> {
-    const user: User = await auth.token.parse(context.request);
-
+  async createItem(_: any, args: { data: ItemCreateInput }, context: Context): Promise<Item> {
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
+      const user: User = await auth.token.parse(context.request);
 
       if (!user) {
         // Write Log
@@ -19,6 +17,8 @@ const itemMutation = {
           code: '#ERR_FF00'
         });
       }
+
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
 
       if (!permission.owner.write) {
         // Write Log
@@ -62,10 +62,10 @@ const itemMutation = {
     }
   },
 
-  async updateItem(_, args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
-    const user: User = await auth.token.parse(context.request);
-
+  async updateItem(_: any, args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         throw await log.warn({
@@ -119,10 +119,10 @@ const itemMutation = {
     }
   },
 
-  async deleteItem(_, args: { where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
-    const user: User = await auth.token.parse(context.request);
-
+  async deleteItem(_: any, args: { where: ItemWhereUniqueInput }, context: Context): Promise<Item> {
     try {
+      const user: User = await auth.token.parse(context.request);
+
       if (!user) {
         // Write Log
         throw await log.warn({

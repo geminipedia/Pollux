@@ -6,11 +6,9 @@ import log from '../util/log';
 import auth from '../auth';
 
 const newsMutation = {
-  async createNews(_, args: { data: NewsCreateInput }, context: Context): Promise<News> {
-    const author: User = await auth.token.parse(context.request);
-
+  async createNews(_: any, args: { data: NewsCreateInput }, context: Context): Promise<News> {
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(author, 'news');
+      const author: User = await auth.token.parse(context.request);
 
       if (!author) {
         // Write Log
@@ -19,6 +17,8 @@ const newsMutation = {
           code: '#ERR_FF00'
         });
       }
+
+      const permission: PermissionTypePayload = await group.permission.$expand(author, 'news');
 
       if (!permission.owner.write) {
         // Write Log
@@ -51,10 +51,10 @@ const newsMutation = {
     }
   },
 
-  async updateNews(_, args: { data: NewsUpdateInput, where: NewsWhereUniqueInput }, context: Context): Promise<News> {
-    const author: User = await auth.token.parse(context.request);
-
+  async updateNews(_: any, args: { data: NewsUpdateInput, where: NewsWhereUniqueInput }, context: Context): Promise<News> {
     try {
+      const author: User = await auth.token.parse(context.request);
+
       if (!author) {
         // Write Log
         throw await log.warn({
@@ -108,10 +108,10 @@ const newsMutation = {
     }
   },
 
-  async deleteNews(_, args: { where: NewsWhereUniqueInput }, context: Context): Promise<News> {
-    const author: User = await auth.token.parse(context.request);
-
+  async deleteNews(_: any, args: { where: NewsWhereUniqueInput }, context: Context): Promise<News> {
     try {
+      const author: User = await auth.token.parse(context.request);
+
       if (!author) {
         // Write Log
         throw await log.warn({

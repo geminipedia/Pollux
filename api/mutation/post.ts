@@ -6,11 +6,9 @@ import log from '../util/log';
 import auth from '../auth';
 
 const postMutation = {
-  async createPost(_, args: { data: PostCreateInput }, context: Context): Promise<Post> {
-    const author: User = await auth.token.parse(context.request);
-
+  async createPost(_: any, args: { data: PostCreateInput }, context: Context): Promise<Post> {
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(author, 'post');
+      const author: User = await auth.token.parse(context.request);
 
       if (!author) {
         // Write Log
@@ -19,6 +17,8 @@ const postMutation = {
           code: '#ERR_FF00'
         });
       }
+
+      const permission: PermissionTypePayload = await group.permission.$expand(author, 'post');
 
       if (!permission.owner.write) {
         // Write Log
@@ -51,10 +51,9 @@ const postMutation = {
     }
   },
 
-  async updatePost(_, args: { data: PostUpdateInput, where: PostWhereUniqueInput }, context: Context): Promise<Post> {
-    const author: User = await auth.token.parse(context.request);
-
+  async updatePost(_: any, args: { data: PostUpdateInput, where: PostWhereUniqueInput }, context: Context): Promise<Post> {
     try {
+      const author: User = await auth.token.parse(context.request);
       if (!author) {
         // Write Log
         throw await log.warn({
@@ -108,10 +107,10 @@ const postMutation = {
     }
   },
 
-  async deletePost(_, args: { where: PostWhereUniqueInput }, context: Context): Promise<Post> {
-    const author: User = await auth.token.parse(context.request);
-
+  async deletePost(_: any, args: { where: PostWhereUniqueInput }, context: Context): Promise<Post> {
     try {
+      const author: User = await auth.token.parse(context.request);
+
       if (!author) {
         // Write Log
         throw await log.warn({

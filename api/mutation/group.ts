@@ -5,11 +5,9 @@ import auth from '../auth';
 import group, { PermissionTypePayload } from '../auth/group';
 
 const groupMutation = {
-  async createGroup(_, args: { data: GroupCreateInput }, context: Context): Promise<Group> {
-    const user: User = await auth.token.parse(context.request);
-
+  async createGroup(_: any, args: { data: GroupCreateInput }, context: Context): Promise<Group> {
     try {
-      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
+      const user: User = await auth.token.parse(context.request);
 
       if (!user) {
         // Write Log
@@ -18,6 +16,8 @@ const groupMutation = {
           code: '#ERR_FF00'
         });
       }
+
+      const permission: PermissionTypePayload = await group.permission.$expand(user, 'group');
 
       if (!permission.anyone.write) {
         // Write Log
@@ -39,6 +39,7 @@ const groupMutation = {
           userId: user.id
         });
       }
+
       // Write Log
       await log.write({
         ip: context.request.ip,
