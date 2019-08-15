@@ -15,7 +15,8 @@ const token = {
         domain: `.${process.env.SITE_DOMAIN}`,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: true
       }
     );
   },
