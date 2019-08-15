@@ -145,6 +145,17 @@ const itemMutation = {
       }
 
       const targetItem: Item = await prisma.item(args.where);
+
+      if (!targetItem) {
+        // Write Log
+        throw await log.warn({
+          ip: context.request.ip,
+          code: '#ERR_P001',
+          customResult: `${targetItem.itemId} ${targetItem.name}`,
+          userId: user.id
+        });
+      }
+
       const permission: PermissionTypePayload = await group.permission.$expand(user, 'item');
       const relation: RelationPayload = await group.relation.$check(user, targetItem.id, 'item');
 
