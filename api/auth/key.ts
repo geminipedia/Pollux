@@ -13,7 +13,7 @@ const publicKey = fs.readFileSync(path.resolve(__dirname, '../../', process.env.
 const privateKey = fs.readFileSync(path.resolve(__dirname, '../../', process.env.PRIVATE_KEY));
 
 const sign = async (payload: UserSignPayload, options: UserKeyOptions = {}): Promise<string> => {
-  return await jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn: options.remember || false ? '30d' : '1d' });
+  return await jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn: options.remember || false ? '30d' : '7d' });
 };
 
 const verify = async (token: string, req: Request): Promise<UserSignPayload> => new Promise((resolve, reject) => {
