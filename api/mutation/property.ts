@@ -151,7 +151,6 @@ const propertyMutation = {
         throw await log.warn({
           ip: context.request.ip,
           code: '#ERR_P001',
-          customResult: `${targetProperty.propertyId} ${targetProperty.name}`,
           userId: user.id
         });
       }
@@ -173,7 +172,7 @@ const propertyMutation = {
       // Write Log
       await log.write({
         ip: context.request.ip,
-        customResult: `Property ${targetProperty.name} updated by ${user.displayName}.`,
+        customResult: `Property ${targetProperty.name} deleted by ${user.displayName}.`,
         userId: user.id
       });
 

@@ -150,8 +150,7 @@ const itemMutation = {
         // Write Log
         throw await log.warn({
           ip: context.request.ip,
-          code: '#ERR_P001',
-          customResult: `${targetItem.itemId} ${targetItem.name}`,
+          code: '#ERR_I001',
           userId: user.id
         });
       }
@@ -173,7 +172,7 @@ const itemMutation = {
       // Write Log
       await log.write({
         ip: context.request.ip,
-        customResult: `Item ${targetItem.name} updated by ${user.displayName}.`,
+        customResult: `Item ${targetItem.name} deleted by ${user.displayName}.`,
         userId: user.id
       });
 
