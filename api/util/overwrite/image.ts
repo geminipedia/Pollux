@@ -1,5 +1,5 @@
 import { User } from '../../model';
-import { ShadowedImageCreateInput, ShadowedImageUpdateManyInput } from '../../types/shadowed/image';
+import { ShadowedImageCreateInput, ShadowedImageUpdateManyInput, ShadowedImageUpdateOneInput } from '../../types/shadowed/image';
 import overWrite from '.';
 
 const image = {
@@ -40,6 +40,31 @@ const image = {
         }
       }
     }
+    return data;
+  },
+
+  updateOne: (
+    data: ShadowedImageUpdateOneInput,
+    user: User
+  ): ShadowedImageUpdateOneInput => {
+    if (data.create && data.create.file.create) {
+      data.create.file.create.uploadBy.connect = { id: user.id };
+    }
+
+    if (data.update && data.update.file.update) {
+      data.create.file.create.uploadBy.connect = { id: user.id };
+    }
+
+    if (data.upsert) {
+      if (data.upsert.create) {
+        data.upsert.create.file.create.uploadBy.connect = { id: user.id };
+      }
+
+      if (data.upsert.update && data.upsert.update.file && data.upsert.update.file.create) {
+        data.upsert.update.file.create.uploadBy.connect = { id: user.id };
+      }
+    }
+
     return data;
   }
 };

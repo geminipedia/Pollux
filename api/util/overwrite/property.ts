@@ -37,8 +37,8 @@ const property = {
         data.upsert.create = overWrite.property.create(data.create, user);
       }
 
-      if (data.upsert.update) {
-        data.update.creator.connect = { id: user.id };
+      if (data.upsert.update && data.upsert.update.creator) {
+        data.upsert.update.creator.connect = { id: user.id };
       }
     }
 
