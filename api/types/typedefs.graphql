@@ -3622,7 +3622,7 @@ type PageInfo {
 
 type PageMeta {
   id: UUID!
-  charset: String!
+  charset: String
   name: String
   property: String
   content: String
